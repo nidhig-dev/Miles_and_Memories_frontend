@@ -6,8 +6,9 @@ html,body{
   margin:0;
   box-sizing: border-box;
   background-color: rgb(253, 254, 255);
-  overflow-x:hidden ;
+  /* overflow-x:hidden ; */
   font-family: "Poppins","sans-serif";
+  
 }
 ::after::before{
   box-sizing: border-box;
