@@ -1,0 +1,32 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto+Slab:wght@700&display=swap');
+
+
+.mainContainer{
+    padding:5px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.logo {
+    padding:5px;
+    color: rgba(18, 202, 202, 0.596);
+    font-family: 'Pacifico', cursive;
+    font-size: 1.5rem;
+    color: #05B6D3;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    letter-spacing: 2px;
+}
+.userInfo{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.userInfo p{
+    font-weight: 600;
+}
+
+hr{
+    width:100%;
+    border:1px solid rgba(128, 128, 128, 0.214);
+}
