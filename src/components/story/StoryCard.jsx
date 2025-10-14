@@ -1,17 +1,43 @@
 import style from "./StoryCard.module.css"
+import dayjs from "dayjs";
+import advancedFormat from "dayjs/plugin/advancedFormat";
+import { BiCurrentLocation } from "react-icons/bi";
+import { useNavigate } from "react-router-dom";
 
-export default function StoryCard({ imageUrl, title, visitedDate, desc, visitedLocation }) {
+
+dayjs.extend(advancedFormat);
+
+
+
+export default function StoryCard({ _id,imageUrl, title, visitedDate, desc, visitedLocation }) {
+    const nav=useNavigate();
+    // 6th June 2024
+    const formattedDate = dayjs(visitedDate).format("Do MMMM YYYY");
+    function handleClick(){
+        console.log("hello",_id);
+        nav(`/storydetail/${_id}`);
+
+    }
     return (
-        <div className={style.oneStoryCard}>
+        <div onClick={handleClick}className={style.oneStoryCard}>
             <img src={imageUrl}
-            alt={title}
+                alt={title}
             />
-            <p>{title}</p>
-            <p>{visitedDate}</p>
-            <p>{desc}</p>
-            <p>{visitedLocation}</p>
+            <div className={style.titleClass}>
+                <h6>{title}</h6>
+                <span>{formattedDate}</span>
+            </div>
+            <div>
+                <span>{desc.slice(0,60)}...</span>
+            </div>
 
-
+            <div className={style.storyLocation}>
+                <BiCurrentLocation className={style.locationIcon} />
+                {visitedLocation.map((location, i) => (
+                <span>
+                    {location} 
+                    </span> ))}
+            </div>
         </div>
     )
 }

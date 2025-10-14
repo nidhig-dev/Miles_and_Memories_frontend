@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react';
 import axios from "axios";
 import style from "../../components/story/StoryCard.module.css"
+import { MdAddCircle } from 'react-icons/md';
+
 
 //import components
 import Navbar from "../../components/navbar/Navbar";
@@ -58,18 +60,25 @@ export default function Home() {
   return (
     <>
       <Navbar />
-
-      {(stories.length > 0) ?
+      <div className={style.mainContainer}>
         <div className={style.storyCard}>
-          {
+          {(stories.length > 0) ?
             stories.map((story) => (
               <StoryCard key={story.title} {...story} />
-
-            ))}
+            ))
+            :
+            <>Empty Card</>
+          }
         </div>
-        :
-        <>Empty Card</>
-      }
+        <div className={style.rightSection}>
+          <div className={style.calenderCard} >
+          </div>
+          <div className={style.addLogo}> 
+          <MdAddCircle className={style.addIcon} />
+          </div>
+        </div>
+        
+      </div>
     </>
   )
 }

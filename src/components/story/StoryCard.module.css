@@ -1,14 +1,94 @@
 .storyCard {
     padding: 20px;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    justify-content: space-around;
+    gap: 20px;
+    justify-content: flex-start;
+    flex: 2;
+    /* Limit height for  2 rows on a page without scroll */
+    height: 550px;
+    /* Scroll if more cards */
+    overflow-y: auto;
 }
-.oneStoryCard{
+
+.mainContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+}
+
+.oneStoryCard {
     border: 1px solid lightgray;
+    flex: 0 1 calc(50% - 20px);
+    /* 2 per row */
     border-radius: 5px;
-    margin:5px;
+    margin: 5px;
+    /* 2 cards per row */
+    width: 45%;
+    text-align: left;
 }
-.oneStoryCard img{
-    border:none;
+
+.oneStoryCard img {
+    border: none;
+    width: 100%;
+    height: auto;
+    max-height: 150px;
+    object-fit: cover;
+    border-radius: 5px 5px 0 0;
+    aspect-ratio: 4 / 3;    /* ensures images shrink proportionally */
+}
+
+.titleClass{
+    padding:3px;
+}
+.titleClass h6{
+    font-weight: 600;
+}
+.titleClass span{
+    color:gray;
+}
+
+.storyLocation {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #555;
+    font-size: 0.95rem;
+    margin-top: 8px;
+}
+
+.locationIcon {
+    color: #05B6D3;
+    font-size: 1.1rem;
+}
+
+.rightSection {
+    flex: 1;
+    margin-left: 30px;
+    background-color: #fafafa;
+    padding: 20px;
+    border-radius: 10px;    
+}
+
+.calenderCard{
+    
+    
+}
+
+.addLogo {
+    position: fixed;
+    /* position from bottom */
+    bottom: 20px;
+    /* position from right */
+    right: 20px;
+    /* lay on top of the page */
+    z-index: 1000;
+}
+
+.addIcon {
+    font-size: 3rem;
+    color: #05B6D3;
+    cursor: pointer;
 }
