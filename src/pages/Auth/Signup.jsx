@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import style from "./Auth.module.css";
 
 //import context
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../context/authContext/AuthContext";
 
 
 export default function Signup() {

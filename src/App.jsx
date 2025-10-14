@@ -11,8 +11,7 @@ import Missing from "./pages/Missing";
 //import components
 
 
-function App() {
-
+function App() { 
   return (
     <>
       <Routes>

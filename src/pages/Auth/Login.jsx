@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import style from "./Auth.module.css";
 
 //import context
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../../context/authContext/AuthContext";
 
 export default function Login() {
   const { login } = useAuth();
@@ -12,7 +12,7 @@ export default function Login() {
     email: "",
     password: "",
   });
-  const [display,setdisplay]=useState("");
+  const [display, setdisplay] = useState("");
 
   function handleClick(e) {
     navigate("/signUp")
@@ -29,10 +29,10 @@ export default function Login() {
       // setdisplay("");
       navigate("/dashboard");
     } catch (err) {
-      setdisplay(err.response.data.errors[0].msg);      
+      setdisplay(err.response.data.errors[0].msg);
       console.error(err.response.data.errors[0].msg);
     }
-    
+
   }
   return (
     <div className={style.mainClass}>
@@ -49,7 +49,7 @@ export default function Login() {
 
           <form onSubmit={handleLogin}
             className={style.formClass}>
-            <h4 className='text-2xl font-semibold mb-7'>Login</h4>           
+            <h4 className='text-2xl font-semibold mb-7'>Login</h4>
             <input type="email"
               value={formData.email}
               name="email"
@@ -69,8 +69,9 @@ export default function Login() {
               onChange={handleChange} />
 
             {(display) &&
-              <p style={{color:"red",
-                         fontSize:"0.8rem", 
+              <p style={{
+                color: "red",
+                fontSize: "0.8rem",
               }}>{display}</p>
             }
 

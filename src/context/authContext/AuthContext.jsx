@@ -1,13 +1,14 @@
 import { createContext, useMemo, useContext, useState } from 'react';
 import { useCookies } from 'react-cookie';
 import axios from "axios";
+import {jwtDecode} from "jwt-decode";
 
 const AuthContext = createContext();
 
 export default function AuthProvider({ children }) {
   const [cookies, setCookies, removeCookie] = useCookies();
   //state to store user name
-  const [user, setUser] = useState(null);
+ const [user, setUser] = useState(null);
 
   const connStr = "http://localhost:3000/api";
 
@@ -16,21 +17,26 @@ export default function AuthProvider({ children }) {
     console.log(formData);
     let res = await axios.post(`${connStr}/user/register`, formData);
     console.log(res.data.token);
+    // const decoded = jwtDecode(res.data.token);
+    // console.log("decoded is",decoded);
+    // setUser({id: decoded.user.id });
     setCookies("token", res.data.token);    
-    setUser(res.data.userName);
   }
 
   async function login(formData) {
     let res = await axios.post(`${connStr}/user/login`, formData);
     setCookies("token", res.data.token);
     console.log("res data is",res.data);
-    setUser(res.data.userName);
+    // const decoded = jwtDecode(res.data.token);
+    // console.log("decoded is", decoded);
+    // setUser({ id: decoded.user.id });
+   
   }
 
   function logout() {
     ["token"].forEach((token) => removeCookie(token));
     //clearing user name
-    setUser(null);
+    //setUser(null);
   }
 
   const value = useMemo(() => ({
@@ -38,8 +44,8 @@ export default function AuthProvider({ children }) {
     login,
     signUp,
     logout,
-    user,
-  }), [cookies,user]);
+    
+  }), [cookies]);
   return (
     <div>
       <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
