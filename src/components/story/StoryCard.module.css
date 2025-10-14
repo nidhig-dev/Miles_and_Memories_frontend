@@ -7,7 +7,7 @@
     justify-content: flex-start;
     flex: 2;
     /* Limit height for  2 rows on a page without scroll */
-    height: 550px;
+    height: 610px;
     /* Scroll if more cards */
     overflow-y: auto;
 }
@@ -16,13 +16,13 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 20px;
+    padding: 10px;
+    font-family: "Lato";
 }
 
 .oneStoryCard {
     border: 1px solid lightgray;
-    flex: 0 1 calc(50% - 20px);
-    /* 2 per row */
+    flex: 0 1 calc(50% - 20px);    /* 2 per row */
     border-radius: 5px;
     margin: 5px;
     /* 2 cards per row */
@@ -43,7 +43,8 @@
 .titleClass{
     padding:3px;
 }
-.titleClass h6{
+.titleClass h4{
+    font-size: large;
     font-weight: 600;
 }
 .titleClass span{

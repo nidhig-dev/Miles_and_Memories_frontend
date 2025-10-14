@@ -1,8 +1,8 @@
-import style from "../../components/story/StoryCard.module.css"
+import style from "./StoryDetail.module.css"
 import dayjs from "dayjs";
 import advancedFormat from "dayjs/plugin/advancedFormat";
 import { BiCurrentLocation } from "react-icons/bi";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -21,9 +21,10 @@ dayjs.extend(advancedFormat);
 
 export default function StoryDetail() {
     const { cookies, logout } = useAuth();
+    const nav = useNavigate();
     const { setUser } = useUser();
     const [storyInfo, setStoryInfo] = useState({
-        visitedLocation:[],
+        visitedLocation: [],
 
     });
     const { id } = useParams();
@@ -67,32 +68,57 @@ export default function StoryDetail() {
             getStoryDetail();
         }
     }, [cookies.token, id])
+
+    function handleEdit() {
+
+    }
+
+    async function handleDelete() {
+        try {
+                await axios.delete(`http://localhost:3000/api/story/${id}`,
+                {
+                    headers: { "x-auth-token": cookies.token },
+                })
+
+            nav("/dashboard");
+        }
+        catch (err) {
+            console.error(err);
+        }
+    }
     return (
         <>
             <Navbar />
             {(storyInfo) ?
                 <>
-                    <div className={style.oneStoryCard}>
-                        <img src={storyInfo.imageUrl}
-                            alt={storyInfo.title}
-                        />
-                        <div className={style.titleClass}>
-                            <h6>{storyInfo.title}</h6>
-                            <span>{formattedDate}</span>
-                        </div>
-                        <div>
-                            <span>{storyInfo.desc}...</span>
-                        </div>
+                    <div className={style.mainContainer}>
+                        <div className={style.storyCard}>
+                            <img src={storyInfo.imageUrl}
+                                alt={storyInfo.title}
+                            />
+                            <div className={style.contentClass}>
+                                <h3>{storyInfo.title}</h3>
+                                <h6>{formattedDate}</h6>
+                                <span>{storyInfo.desc}</span>
 
-                        <div className={style.storyLocation}>
-                            <BiCurrentLocation className={style.locationIcon} />
-                            {/* {storyInfo.visitedLocation} */}
-                            {(storyInfo.visitedLocation.length > 0) ?
-                                storyInfo.visitedLocation.map((location, i) => (
-                                    <span>
-                                        {location}
-                                    </span>)) : storyInfo.visitedLocation
+
+                                <div className={style.storyLocation}>
+                                    <BiCurrentLocation className={style.locationIcon} />
+                                    {/* {storyInfo.visitedLocation} */}
+                                    {(storyInfo.visitedLocation.length > 0) ?
+                                        storyInfo.visitedLocation.map((location, i) => (
+                                            <span>
+                                                {location}
+                                            </span>)) : storyInfo.visitedLocation
                                     }
+                                </div>
+                            </div>
+                        </div>
+                        <div class={style.btnContainer}>
+                            <button className={style.btnPrimary}
+                                onClick={handleEdit}>Edit</button>
+                            <button className={style.btnPrimary}
+                                onClick={handleDelete} >Delete</button>
                         </div>
                     </div>
                 </>

@@ -14,7 +14,6 @@ export default function StoryCard({ _id,imageUrl, title, visitedDate, desc, visi
     // 6th June 2024
     const formattedDate = dayjs(visitedDate).format("Do MMMM YYYY");
     function handleClick(){
-        console.log("hello",_id);
         nav(`/storydetail/${_id}`);
 
     }
@@ -24,7 +23,7 @@ export default function StoryCard({ _id,imageUrl, title, visitedDate, desc, visi
                 alt={title}
             />
             <div className={style.titleClass}>
-                <h6>{title}</h6>
+                <h4>{title}</h4>
                 <span>{formattedDate}</span>
             </div>
             <div>
