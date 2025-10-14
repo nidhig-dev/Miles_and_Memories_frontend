@@ -2,15 +2,15 @@ import style from "./Navbar.module.css";
 import { Link } from "react-router-dom";
 
 //import context
-import { useAuth } from "../context/authContext/AuthContext";
-import { useUser } from "../context/userContext/userContext";
+import { useAuth } from "../../context/authContext/AuthContext";
+import { useUser } from "../../context/userContext/userContext";
 
 
 export default function Navbar() {
     //const { user } = useAuth();
     //console.log(user);
-    const{user}=useUser();
-    const{logout}=useAuth();
+    const { user } = useUser();
+    const { logout } = useAuth();
     return (
         <>
             <div className={style.mainContainer}>

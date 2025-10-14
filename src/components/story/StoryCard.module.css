@@ -1,0 +1,14 @@
+.storyCard {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+.oneStoryCard{
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    margin:5px;
+}
+.oneStoryCard img{
+    border:none;
+}

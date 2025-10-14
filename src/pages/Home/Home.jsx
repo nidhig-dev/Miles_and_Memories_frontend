@@ -1,29 +1,28 @@
 import { useEffect, useState } from 'react';
 import axios from "axios";
+import style from "../../components/story/StoryCard.module.css"
 
 //import components
-import Navbar from "../../components/Navbar";
+import Navbar from "../../components/navbar/Navbar";
+import StoryCard from '../../components/story/StoryCard';
 //import context
 import { useAuth } from "../../context/authContext/AuthContext";
 import { useUser } from "../../context/userContext/userContext";
 
-//import helper function to set token in header
-//import apiService from "../../utilities/apiService.mjs";
-
 export default function Home() {
   const { cookies, logout } = useAuth();
   const { setUser } = useUser();
-  
-  //get user info
+  const [stories, setStories] = useState([]);
 
+  //get user info
   async function getUserInfo() {
     try {
       let res = await axios.get("http://localhost:3000/api/user/profile", {
         headers: { "x-auth-token": cookies.token },
       });
-      console.log("res is",res.data);
+      console.log("res is", res.data);
       //provide the user info to all children
-      setUser(res.data);     
+      setUser(res.data);
     }
     catch (err) {
       logout();
@@ -31,19 +30,46 @@ export default function Home() {
       //err.response.data.errors[0].msg);
     }
   }
+  //get user stories
+  async function getUserStories() {
+    try {
+      console.log("token is", cookies.token);
+      let res = await axios.get("http://localhost:3000/api/story", {
+        headers: { "x-auth-token": cookies.token },
+      });
+      console.log("story res is", res.data);
+      //provide the user info to all children
+      setStories(res.data);
+    }
+    catch (err) {
+      //logout();
+      console.error(err);
+      //err.response.data.errors[0].msg);
+    }
+  }
   useEffect(() => {
     if (cookies.token) {
       getUserInfo();
+      getUserStories();
     }
-
   }, [cookies.token])
+
+
   return (
     <>
-      <Navbar/>
-      <div>
-        
-      </div>
+      <Navbar />
 
+      {(stories.length > 0) ?
+        <div className={style.storyCard}>
+          {
+            stories.map((story) => (
+              <StoryCard key={story.title} {...story} />
+
+            ))}
+        </div>
+        :
+        <>Empty Card</>
+      }
     </>
   )
 }
