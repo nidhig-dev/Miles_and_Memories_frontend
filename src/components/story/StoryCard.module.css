@@ -5,11 +5,11 @@
     align-items: center;
     gap: 20px;
     justify-content: flex-start;
-    flex: 2;
+    flex: 4;
     /* Limit height for  2 rows on a page without scroll */
     height: 610px;
     /* Scroll if more cards */
-    overflow-y: auto;
+    /* overflow-y: auto; */
 }
 
 .mainContainer {
@@ -71,11 +71,6 @@
     background-color: #fafafa;
     padding: 20px;
     border-radius: 10px;    
-}
-
-.calenderCard{
-    
-    
 }
 
 .addLogo {

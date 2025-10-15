@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from "axios";
 import style from "../../components/story/StoryCard.module.css"
 import { MdAddCircle } from 'react-icons/md';
-
+import { useNavigate } from 'react-router-dom';
 
 //import components
 import Navbar from "../../components/navbar/Navbar";
@@ -15,6 +15,7 @@ export default function Home() {
   const { cookies, logout } = useAuth();
   const { setUser } = useUser();
   const [stories, setStories] = useState([]);
+  const nav=useNavigate();
 
   //get user info
   async function getUserInfo() {
@@ -56,7 +57,9 @@ export default function Home() {
     }
   }, [cookies.token])
 
-
+  function handleAdd() {
+    nav("/addstory")
+  }
   return (
     <>
       <Navbar />
@@ -73,11 +76,11 @@ export default function Home() {
         <div className={style.rightSection}>
           <div className={style.calenderCard} >
           </div>
-          <div className={style.addLogo}> 
-          <MdAddCircle className={style.addIcon} />
+          <div className={style.addLogo}>
+            <MdAddCircle onClick={handleAdd} className={style.addIcon} />
           </div>
         </div>
-        
+
       </div>
     </>
   )

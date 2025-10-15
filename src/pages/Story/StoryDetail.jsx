@@ -27,6 +27,8 @@ export default function StoryDetail() {
         visitedLocation: [],
 
     });
+    const [isEdit, setIsEdit] = useState(false);
+    const[formData,setFormData]=useState(null)
     const { id } = useParams();
     console.log("story id is", id);
     // 6th June 2024
@@ -70,59 +72,138 @@ export default function StoryDetail() {
     }, [cookies.token, id])
 
     function handleEdit() {
+        setFormData({
+            imageUrl: storyInfo.imageUrl,
+            title: storyInfo.title,
+            desc: storyInfo.desc,
+            visitedDate: formattedDate,
+            visitedLocation: storyInfo.visitedLocation,
+        })
+        setIsEdit(true);
 
     }
 
     async function handleDelete() {
         try {
-                await axios.delete(`http://localhost:3000/api/story/${id}`,
-                {
-                    headers: { "x-auth-token": cookies.token },
-                })
-
+            await axios.delete(`http://localhost:3000/api/story/${id}`, {
+                headers: { "x-auth-token": cookies.token },
+            })
             nav("/dashboard");
         }
         catch (err) {
             console.error(err);
         }
     }
+    function handleChange(e){
+        setFormData({...formData,[e.target.name]:e.target.value});
+    }
+    async function handleSubmit(e){
+        e.preventDefault();
+        try {
+            console.log(storyInfo.imageUrl);
+            console.log("id is", id);
+            console.log("token is", cookies.token);
+
+            await axios.put(`http://localhost:3000/api/story/${id}`,formData, {
+                headers: { "x-auth-token": cookies.token },
+            })
+            nav("/dashboard");
+        }
+        catch (err) {
+            console.error(err);
+        }
+
+    }
     return (
         <>
             <Navbar />
-            {(storyInfo) ?
+
+            {(!isEdit)
+                ?
+                (storyInfo)
+                    ?
+                    <>
+                        <div className={style.mainContainer}>
+                            <div className={style.storyCard}>
+                                <img src={storyInfo.imageUrl}
+                                    alt={storyInfo.title}
+                                />
+                                <div className={style.contentClass}>
+                                    <h3>{storyInfo.title}</h3>
+                                    <h6>{formattedDate}</h6>
+                                    <span>{storyInfo.desc}</span>
+
+
+                                    <div className={style.storyLocation}>
+                                        <BiCurrentLocation className={style.locationIcon} />
+                                        {/* {storyInfo.visitedLocation} */}
+                                        {(storyInfo.visitedLocation.length > 0) ?
+                                            storyInfo.visitedLocation.map((location, i) => (
+                                                <span>
+                                                    {location}
+                                                </span>)) : storyInfo.visitedLocation
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class={style.btnContainer}>
+                                <button className={style.btnPrimary}
+                                    onClick={handleEdit}>Edit</button>
+                                <button className={style.btnPrimary}
+                                    onClick={handleDelete} >Delete</button>
+                                <button className={style.btnPrimary}
+                                    onClick={() => nav("/dashboard")} >back</button>
+                            </div>
+                        </div>
+                    </>
+                    : <p>Loading...</p>
+                :
                 <>
                     <div className={style.mainContainer}>
                         <div className={style.storyCard}>
-                            <img src={storyInfo.imageUrl}
-                                alt={storyInfo.title}
-                            />
-                            <div className={style.contentClass}>
-                                <h3>{storyInfo.title}</h3>
-                                <h6>{formattedDate}</h6>
-                                <span>{storyInfo.desc}</span>
+                            <form onSubmit ={handleSubmit}>
+                                <img src={storyInfo.imageUrl}
+                                    alt={storyInfo.title}
+                                />
+                                <div className={style.contentClass}>
+                                    <input className={style.inputBox}
+                                        type="text"
+                                        value={formData.title}
+                                        name="title"
+                                        onChange={handleChange} />
 
+                                    <input className={style.inputBox}
+                                        type="text"
+                                        value={formData.visitedDate}
+                                        name="visitedDate"
+                                        onChange={handleChange} />
 
-                                <div className={style.storyLocation}>
-                                    <BiCurrentLocation className={style.locationIcon} />
-                                    {/* {storyInfo.visitedLocation} */}
-                                    {(storyInfo.visitedLocation.length > 0) ?
-                                        storyInfo.visitedLocation.map((location, i) => (
-                                            <span>
-                                                {location}
-                                            </span>)) : storyInfo.visitedLocation
-                                    }
+                                    <textarea className={style.inputArea}
+                                        value={formData.desc}
+                                        name="desc"
+                                        onChange={handleChange} />
+
+                                    <input className={style.inputBox}
+                                        type="text"
+                                        value={formData.visitedLocation}
+                                        name="visitedLocation"
+                                        onChange={handleChange} />
+
+                                    <input className={style.btnSubmit}
+                                        type="submit"
+                                        value="Submit" />
+
                                 </div>
-                            </div>
+
+                            </form>
                         </div>
-                        <div class={style.btnContainer}>
+                        <div className={style.btnContainer}>
                             <button className={style.btnPrimary}
-                                onClick={handleEdit}>Edit</button>
-                            <button className={style.btnPrimary}
-                                onClick={handleDelete} >Delete</button>
+                                onClick={() => nav("/dashboard")} >back</button>
                         </div>
                     </div>
+
                 </>
-                : <p>Loading...</p>
             }
         </>
     )
