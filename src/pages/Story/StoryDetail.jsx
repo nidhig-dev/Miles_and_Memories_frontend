@@ -28,10 +28,16 @@ export default function StoryDetail() {
 
     });
     const [isEdit, setIsEdit] = useState(false);
-    const[formData,setFormData]=useState(null)
+    const [formData, setFormData] = useState({
+        title: "",
+        desc: "",
+        visitedDate: "",
+        visitedLocation: "",
+    })
     const { id } = useParams();
     console.log("story id is", id);
     // 6th June 2024
+                          
     const formattedDate = dayjs(storyInfo.visitedDate).format("Do MMMM YYYY");
     //get user info
     async function getUserInfo() {
@@ -76,7 +82,9 @@ export default function StoryDetail() {
             imageUrl: storyInfo.imageUrl,
             title: storyInfo.title,
             desc: storyInfo.desc,
-            visitedDate: formattedDate,
+            // changing the date format 6th october 2017 to 2017-10-06 to be compatible with calender Date field
+
+            visitedDate: dayjs(storyInfo.visitedDate).format("YYYY-MM-DD"),
             visitedLocation: storyInfo.visitedLocation,
         })
         setIsEdit(true);
@@ -94,17 +102,17 @@ export default function StoryDetail() {
             console.error(err);
         }
     }
-    function handleChange(e){
-        setFormData({...formData,[e.target.name]:e.target.value});
+    function handleChange(e) {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
     }
-    async function handleSubmit(e){
+    async function handleSubmit(e) {
         e.preventDefault();
         try {
             console.log(storyInfo.imageUrl);
             console.log("id is", id);
             console.log("token is", cookies.token);
 
-            await axios.put(`http://localhost:3000/api/story/${id}`,formData, {
+            await axios.put(`http://localhost:3000/api/story/${id}`, formData, {
                 headers: { "x-auth-token": cookies.token },
             })
             nav("/dashboard");
@@ -132,17 +140,9 @@ export default function StoryDetail() {
                                     <h3>{storyInfo.title}</h3>
                                     <h6>{formattedDate}</h6>
                                     <span>{storyInfo.desc}</span>
-
-
                                     <div className={style.storyLocation}>
                                         <BiCurrentLocation className={style.locationIcon} />
-                                        {/* {storyInfo.visitedLocation} */}
-                                        {(storyInfo.visitedLocation.length > 0) ?
-                                            storyInfo.visitedLocation.map((location, i) => (
-                                                <span>
-                                                    {location}
-                                                </span>)) : storyInfo.visitedLocation
-                                        }
+                                        {storyInfo.visitedLocation}
                                     </div>
                                 </div>
                             </div>
@@ -161,37 +161,51 @@ export default function StoryDetail() {
                 <>
                     <div className={style.mainContainer}>
                         <div className={style.storyCard}>
-                            <form onSubmit ={handleSubmit}>
+                            <form onSubmit={handleSubmit}>
                                 <img src={storyInfo.imageUrl}
                                     alt={storyInfo.title}
                                 />
                                 <div className={style.contentClass}>
-                                    <input className={style.inputBox}
-                                        type="text"
-                                        value={formData.title}
-                                        name="title"
-                                        onChange={handleChange} />
+                                    <div className={style.gridClass}>
+                                        <label>Title: </label>
+                                        <input className={style.inputBox}
+                                            type="text"
+                                            required
+                                            value={formData.title}
+                                            name="title"
+                                            onChange={handleChange} />
+                                    </div>
+                                    <div className={style.gridClass}>
+                                        <label>VisitedDate: </label>
+                                        <input className={style.inputBox}
+                                            type="date"
+                                            required
+                                            value={formData.visitedDate}
+                                            name="visitedDate"
+                                            onChange={handleChange} />
+                                    </div>
+                                    <div className={style.gridClass}>
+                                        <label>Description: </label>
+                                        <textarea className={style.inputArea}
+                                            required
+                                            value={formData.desc}
+                                            name="desc"
+                                            onChange={handleChange} />
+                                    </div>
+                                    <div className={style.gridClass}>
+                                        <label>Visited Location: </label>
+                                        <input className={style.inputBox}
+                                            type="text"
+                                            required
+                                            value={formData.visitedLocation}
+                                            name="visitedLocation"
+                                            onChange={handleChange} />
+                                        <input className={style.btnSubmit}
+                                            type="submit"
+                                            value="Submit" />
 
-                                    <input className={style.inputBox}
-                                        type="text"
-                                        value={formData.visitedDate}
-                                        name="visitedDate"
-                                        onChange={handleChange} />
+                                    </div>
 
-                                    <textarea className={style.inputArea}
-                                        value={formData.desc}
-                                        name="desc"
-                                        onChange={handleChange} />
-
-                                    <input className={style.inputBox}
-                                        type="text"
-                                        value={formData.visitedLocation}
-                                        name="visitedLocation"
-                                        onChange={handleChange} />
-
-                                    <input className={style.btnSubmit}
-                                        type="submit"
-                                        value="Submit" />
 
                                 </div>
 

@@ -1,6 +1,9 @@
 .mainClass {
-    /* background-color: rgba(0, 255, 255, 0.23); */
-    background-color: rgb(70, 131, 180, 0.434);
+    background-color: rgba(0, 255, 255, 0.23); 
+    /* 457b9d */
+    /* a8dadc */
+    /* 1d3557 */
+    /* background-color: rgba(70, 131, 180, 0.59); */
     position: relative;
     min-height: 100vh;
     overflow: hidden;
@@ -24,10 +27,12 @@
 
 .containerClass {
     padding: 50px 100px;
+    /* padding-right:500px; */
     display: flex;
-    height: 100vh;
-    width: 100vw;
+    height: 85vh;
+    /* width: 100vw; */
     overflow: hidden;
+
 }
 
 .backgroundClassLogin {
@@ -95,7 +100,14 @@
     align-items: center;
 }
 
+.formClass h4 {
+    font-weight: 600;
+    font-size: larger;
+    padding-bottom: 10px;
+}
+
 .btnPrimary {
+    /* background-color: #457b9d; */
     background-color: #05B6D3;
     border: 1px none #ccc;
     border-radius: 20px;
@@ -104,19 +116,22 @@
     outline: none;
     /* remove default outline */
     font-size: .8em;
-    margin-bottom: 1rem;
+    margin-top: 1rem;
     box-sizing: border-box;
     color: white;
     font-weight: 600;
 }
 
 .btnPrimary:hover {
+    /* background-color: #a8dadc; */
     background-color: rgba(0, 255, 255, 0.23);
+    /* color:#457b9d; */
     color: #05B6D3;
 }
 
 .btnSecondary {
-    background-color: rgba(0, 255, 255, 0.23);
+    background-color:rgba(0, 255, 255, 0.23);
+    /* color:#457b9d; */
     color: #05B6D3;
     border: 1px none #ccc;
     border-radius: 20px;
@@ -125,12 +140,13 @@
     outline: none;
     /* remove default outline */
     font-size: 0.8rem;
-    margin-bottom: 1rem;
+    margin-top: 1rem;
     box-sizing: border-box;
     font-weight: 600;
 }
 
 .btnSecondary:hover {
+    /* background-color: #457b9d; */
     background-color: #05B6D3;
     color: white;
 }

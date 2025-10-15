@@ -49,7 +49,7 @@ export default function Login() {
 
           <form onSubmit={handleLogin}
             className={style.formClass}>
-            <h4 className='text-2xl font-semibold mb-7'>Login</h4>
+            <h4>Login</h4>
             <input type="email"
               value={formData.email}
               name="email"
@@ -80,7 +80,7 @@ export default function Login() {
               className={style.btnPrimary} />
 
             <p style={{
-              paddingBottom: "8px",
+              // paddingBottom: "8px",
               fontSize: "0.8rem"
             }}>Or</p>
 

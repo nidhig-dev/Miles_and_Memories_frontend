@@ -26,7 +26,7 @@ export default function StoryCard({ _id,imageUrl, title, visitedDate, desc, visi
                 <h4>{title}</h4>
                 <span>{formattedDate}</span>
             </div>
-            <div>
+            <div className={style.descClass}>
                 <span>{desc.slice(0,60)}...</span>
             </div>
 

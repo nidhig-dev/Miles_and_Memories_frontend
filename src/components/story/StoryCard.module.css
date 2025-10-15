@@ -1,15 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto+Slab:wght@700&display=swap');
+
 .storyCard {
     padding: 20px;
     display: flex;
     flex-wrap: wrap;
-    align-items: center;
+    align-items: flex-start;
     gap: 20px;
     justify-content: flex-start;
     flex: 4;
-    /* Limit height for  2 rows on a page without scroll */
+    /* Limit height for  story detail page */
     height: 610px;
-    /* Scroll if more cards */
-    /* overflow-y: auto; */
 }
 
 .mainContainer {
@@ -22,7 +22,6 @@
 
 .oneStoryCard {
     border: 1px solid lightgray;
-    flex: 0 1 calc(50% - 20px);    /* 2 per row */
     border-radius: 5px;
     margin: 5px;
     /* 2 cards per row */
@@ -34,21 +33,34 @@
     border: none;
     width: 100%;
     height: auto;
-    max-height: 150px;
+    max-height: 180px;
     object-fit: cover;
     border-radius: 5px 5px 0 0;
-    aspect-ratio: 4 / 3;    /* ensures images shrink proportionally */
+    aspect-ratio: 4 / 3;
+    /* ensures images shrink proportionally */
 }
 
-.titleClass{
-    padding:3px;
+.titleClass {
+    padding: 3px;
+    padding-left: 10px;
+    cursor: pointer;
 }
-.titleClass h4{
+
+.titleClass h4 {
     font-size: large;
     font-weight: 600;
+    margin-bottom: 5px;
+    margin-top: 10px;
 }
-.titleClass span{
-    color:gray;
+
+.titleClass span {
+    color: gray;
+
+}
+
+.descClass {
+    padding-left: 10px;
+    padding-top: 10px;
 }
 
 .storyLocation {
@@ -58,6 +70,8 @@
     color: #555;
     font-size: 0.95rem;
     margin-top: 8px;
+    padding-left: 10px;
+    cursor: pointer;
 }
 
 .locationIcon {
@@ -70,7 +84,7 @@
     margin-left: 30px;
     background-color: #fafafa;
     padding: 20px;
-    border-radius: 10px;    
+    border-radius: 10px;
 }
 
 .addLogo {
@@ -78,7 +92,7 @@
     /* position from bottom */
     bottom: 20px;
     /* position from right */
-    right: 20px;
+    right: 100px;
     /* lay on top of the page */
     z-index: 1000;
 }
@@ -87,4 +101,32 @@
     font-size: 3rem;
     color: #05B6D3;
     cursor: pointer;
+}
+
+.emptyStoryCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex: 4;
+    height: 500px;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    /* margin: 5px; */
+    text-align: center
+}
+
+.createClass p {
+    font-size: large;
+    font-weight: 600;
+    color: gray;
+    font-family: 'Lato';
+}
+
+.createStoryLogo {
+    /* background-color: #05B6D3; */
+    color: #05B6D3;
+    font-size: 50px;
+
+
 }

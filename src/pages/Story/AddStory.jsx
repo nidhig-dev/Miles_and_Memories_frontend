@@ -115,8 +115,8 @@ export default function StoryDetail() {
                         
                         <div className={style.contentClass}>
                             <div>
-                                <label>Choose Image: </label>
-                                <input className={style.inputBox}
+                                <label >Choose an Image: </label>
+                                <input className={style.fileInput}
                                     type="file"
                                     name="image_story"
                                     accept="image/*"
@@ -136,7 +136,7 @@ export default function StoryDetail() {
                                 )}
                             </div>
 
-                            <div>
+                            <div className={style.gridClass}>
                                 <label>Title: </label>
                                 <input className={style.inputBox}
                                     type="text"
@@ -146,17 +146,16 @@ export default function StoryDetail() {
                                     onChange={handleChange} />
                             </div>
 
-                            <div>
+                            <div className={style.gridClass} >
                                 <label>Visited Date: </label>
                                 <input className={style.inputBox}
-                                    type="text"
-                                    placeholder="5th December 2024"
+                                    type="date"
                                     value={addStory.visitedDate}
                                     name="visitedDate"
                                     onChange={handleChange} />
                             </div>
 
-                            <div>
+                            <div className={style.gridClass}>
                                 <label>Description: </label>
                                 <textarea className={style.inputArea}
                                     placeholder="Enter Story description"
@@ -165,7 +164,7 @@ export default function StoryDetail() {
                                     onChange={handleChange} />
                             </div>
 
-                            <div>
+                            <div className={style.gridClass} >
                                 <label>Visited Location: </label>
                                 <input className={style.inputBox}
                                     type="text"
@@ -175,7 +174,8 @@ export default function StoryDetail() {
                                     onChange={handleChange} />
                             </div>
 
-                            <div><input className={style.btnSubmit}
+                            <div className={style.gridSubmit}>
+                               <input className={style.btnSubmit}
                                 type="submit"
                                 value="Submit" />
                             </div>

@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import axios from "axios";
 import style from "../../components/story/StoryCard.module.css"
 import { MdAddCircle } from 'react-icons/md';
+import { IoCreate } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
 
 //import components
@@ -70,15 +71,22 @@ export default function Home() {
               <StoryCard key={story.title} {...story} />
             ))
             :
-            <>Empty Card</>
+            <> 
+            <div className={style.emptyStoryCard}>
+              <div className={style.createClass}>
+                <IoCreate className={style.createStoryLogo}/> 
+                <p>Create new story</p>     
+                </div>
+                    </div>
+            </>
           }
         </div>
         <div className={style.rightSection}>
-          <div className={style.calenderCard} >
-          </div>
           <div className={style.addLogo}>
             <MdAddCircle onClick={handleAdd} className={style.addIcon} />
+            
           </div>
+          
         </div>
 
       </div>

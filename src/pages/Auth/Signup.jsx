@@ -63,7 +63,7 @@ export default function Signup() {
 
           <form onSubmit={handleSignUp}
             className={style.formClass}>
-            <h4 className='text-2xl font-semibold mb-7'>SignUp</h4>
+            <h4>SignUp</h4>
 
             <input type="text"
               value={formData.name}
@@ -116,8 +116,7 @@ export default function Signup() {
               className={style.btnSecondary}
             />
 
-            <p style={{
-              paddingBottom: "8px",
+            <p style={{           
               fontSize: "0.8rem"
             }}>Or</p>
 
