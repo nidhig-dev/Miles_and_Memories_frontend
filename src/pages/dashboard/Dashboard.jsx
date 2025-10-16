@@ -42,7 +42,6 @@ export default function Home() {
         headers: { "x-auth-token": cookies.token },
       });
       console.log("story res is", res.data);
-      //provide the user info to all children
       setStories(res.data);
     }
     catch (err) {
