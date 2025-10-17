@@ -42,7 +42,12 @@ export default function Signup() {
       //setdisplay(false);
       navigate("/dashboard");
     } catch (err) {
-      setdisplay(err.response.data.errors[0].msg);
+      if (err.response) {
+        setdisplay(err.response.data.errors[0].msg);
+      }
+      else {
+        setdisplay("SignUp Failed");
+      }
       console.error(err.response.data.errors[0].msg);
     }
   }
