@@ -41,8 +41,6 @@
     padding: 10px;
     display: block;
     padding-left: 20px;
-    ;
-    /* flex:1; */
 }
 
 .contentClass h3 {
@@ -60,7 +58,7 @@
 }
 
 .contentClass span {
-    color: gray;
+    color: black;
     display: block;
     margin-top: 5px;
 }
@@ -69,36 +67,36 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    color: #555;
+    color:var(--buttonSecondaryColor);
+    font-weight: 600;
     font-size: 0.95rem;
     margin-top: 4px;
 }
 
 .locationIcon {
-    color: #05B6D3;
+    color: var(--buttonPrimaryBackground);
     font-size: 1.1rem;
 }
 
 .btnPrimary {
     flex: 1;
     min-width: 110px;
-    background-color: #05B6D3;
+    background-color: var(--buttonPrimaryBackground);
     border: 1px none #ccc;
     border-radius: 10px;
     padding: 0.5rem;
     height: 12%;
     width: 45%;
     outline: none;
-    /* remove default outline */
     font-size: .8em;
-    color: white;
+    color: var(--buttonPrimaryColor);
     font-weight: 600;
     cursor: pointer;
 }
 
 .btnPrimary:hover {
-    background-color: rgba(0, 255, 255, 0.23);
-    color: #05B6D3;
+    background-color: var(--buttonSecondaryBackground);
+    color: var(--buttonSecondaryColor);
 }
 
 .inputBox {
@@ -106,9 +104,9 @@
     border-radius: 6px;
     padding: 0.5rem;
     width: 50%;
-    outline: none;    /* remove default outline */
+    outline: none;
     font-size: .8rem;
-    font-family: "Lato", sans-serif;        
+    font-family: "Lato", sans-serif;
     font-weight: 400;
     margin: 0.5rem;
     box-sizing: border-box;
@@ -122,7 +120,7 @@
     width: 80%;
     resize: vertical;
     min-height: 100px;
-    outline: none;    /* remove default outline */
+    outline: none;
     resize: vertical;
     font-size: 0.8rem;
     font-family: "Lato", sans-serif;
@@ -135,7 +133,6 @@
 .form {
     border: 1px solid lightgray;
     border-radius: 8px;
-    /* padding:10px; */
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -149,9 +146,8 @@ label {
 }
 
 .btnSubmit {
-    /* flex:1; */
     min-width: 50px;
-    background-color: #05B6D3;
+    background-color: var(--buttonPrimaryBackground);
     border: 1px none #ccc;
     border-radius: 10px;
     padding: 0.5rem;
@@ -159,17 +155,17 @@ label {
     width: 15%;
     margin-left: 25px;
     outline: none;
-    /* remove default outline */
     font-size: .8em;
-    color: white;
+    color: var(--buttonPrimaryColor);
+    ;
     font-weight: 600;
     cursor: pointer;
-    
+
 }
 
 .btnSubmit:hover {
-    background-color: rgba(0, 255, 255, 0.23);
-    color: #05B6D3;
+    background-color: var(--buttonSecondaryBackground);
+    color: var(--buttonSecondaryColor);
 }
 
 .addStoryCard {
@@ -182,6 +178,7 @@ label {
     width: 60%;
     max-height: 1000px;
 }
+
 .fileInput {
     border: 1px solid none;
     border-radius: 6px;
@@ -191,7 +188,6 @@ label {
     background-color: rgba(211, 211, 211, 0.221);
 }
 
-/* Style the "Choose File" button */
 .fileInput::file-selector-button {
     background-color: gray;
     color: white;
@@ -204,26 +200,52 @@ label {
     transition: all 0.3s ease;
 }
 
-/* ✨ Hover effect */
 .fileInput::file-selector-button:hover {
-    background-color:rgba(128, 128, 128, 0.359);
+    background-color: rgba(128, 128, 128, 0.359);
     color: black;
-    /* border: 1px solid #05B6D3; */
 }
+
 .gridClass {
     display: flex;
     align-items: center;
     margin-bottom: 12px;
     gap: 12px;
 }
+
 .gridClass label {
     width: 110px;
-    /* adjust to your design */
     font-weight: 600;
     color: gray;
     text-align: right;
 }
-.gridSubmit{
+
+.gridSubmit {
     display: flex;
-    justify-content: center;    
+    justify-content: center;
+}
+
+.imageContainer {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    height: auto;
+}
+
+.imageButtons {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+    cursor: pointer;
+    opacity: 0.9;
+    transition: opacity 0.2s ease;
+}
+
+.imageButtons:hover {
+    opacity: 0.5;
+    border:1px solid black;
 }

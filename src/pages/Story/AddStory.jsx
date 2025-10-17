@@ -9,7 +9,7 @@ import axios from "axios";
 
 //import context
 import { useAuth } from "../../context/authContext/AuthContext";
-import { useUser } from "../../context/userContext/userContext";
+import { useUser } from "../../context/userContext/UserContext";
 
 //import components
 import Navbar from "../../components/navbar/Navbar";

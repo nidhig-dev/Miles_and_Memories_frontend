@@ -1,9 +1,7 @@
+
+ 
 .mainClass {
-    background-color: rgba(0, 255, 255, 0.23); 
-    /* 457b9d */
-    /* a8dadc */
-    /* 1d3557 */
-    /* background-color: rgba(70, 131, 180, 0.59); */
+    background-color: var(--backgroundColor);
     position: relative;
     min-height: 100vh;
     overflow: hidden;
@@ -108,7 +106,7 @@
 
 .btnPrimary {
     /* background-color: #457b9d; */
-    background-color: #05B6D3;
+    background-color: var(--buttonPrimaryBackground);
     border: 1px none #ccc;
     border-radius: 20px;
     padding: 0.5rem;
@@ -118,21 +116,23 @@
     font-size: .8em;
     margin-top: 1rem;
     box-sizing: border-box;
-    color: white;
+    color: var(--buttonPrimaryColor);
     font-weight: 600;
 }
 
 .btnPrimary:hover {
     /* background-color: #a8dadc; */
-    background-color: rgba(0, 255, 255, 0.23);
+    background-color: var(--buttonSecondaryBackground);
     /* color:#457b9d; */
-    color: #05B6D3;
+    color: var(--buttonSecondaryColor);
 }
 
 .btnSecondary {
-    background-color:rgba(0, 255, 255, 0.23);
+    background-color:var(--buttonSecondaryBackground);
+    /* rgba(0, 255, 255, 0.23); */
     /* color:#457b9d; */
-    color: #05B6D3;
+    color:var(--buttonSecondaryColor);
+     /* #05B6D3; */
     border: 1px none #ccc;
     border-radius: 20px;
     padding: 0.5rem;
@@ -147,8 +147,8 @@
 
 .btnSecondary:hover {
     /* background-color: #457b9d; */
-    background-color: #05B6D3;
-    color: white;
+    background-color: var(--buttonPrimaryBackground);
+    color:var(--buttonPrimaryColor);
 }
 
 .loginClass {

@@ -67,7 +67,8 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    color: #555;
+    color: var(--buttonSecondaryColor);
+    font-weight: 600;
     font-size: 0.95rem;
     margin-top: 8px;
     padding-left: 10px;
@@ -75,7 +76,7 @@
 }
 
 .locationIcon {
-    color: #05B6D3;
+    color: var(--buttonPrimaryBackground);
     font-size: 1.1rem;
 }
 
@@ -99,7 +100,7 @@
 
 .addIcon {
     font-size: 3rem;
-    color: #05B6D3;
+    color: var(--buttonPrimaryBackground);
     cursor: pointer;
 }
 
@@ -125,7 +126,7 @@
 
 .createStoryLogo {
     /* background-color: #05B6D3; */
-    color: #05B6D3;
+    color: var(--buttonPrimaryBackground);
     font-size: 50px;
 
 

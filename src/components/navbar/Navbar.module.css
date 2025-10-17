@@ -32,6 +32,21 @@ h4{
     font-weight: 600;
 }
 
+.userInfo a {
+    color: black; 
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.userInfo a:hover {
+    color:rgba(0, 0, 0, 0.596);   
+}
+
+.userInfo a:visited {
+    color: black;
+}
+
 hr{
     width:100%;
     border:2px solid rgba(128, 128, 128, 0.214);

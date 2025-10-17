@@ -5,5 +5,10 @@ body {
   height: 100%;
   padding: 0;
   overflow: auto;
+  --backgroundColor: rgba(0, 255, 255, 0.23); 
+    --buttonPrimaryBackground: #05B6D3; 
+    --buttonPrimaryColor: white;
+    --buttonSecondaryBackground: rgba(0, 255, 255, 0.23);
+    --buttonSecondaryColor: #05B6D3;
 }
 

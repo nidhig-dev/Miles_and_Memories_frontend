@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 //import context
 import { useAuth } from "../../context/authContext/AuthContext";
-import { useUser } from "../../context/userContext/userContext";
+import { useUser } from "../../context/userContext/UserContext";
 
 
 export default function Navbar() {
@@ -20,7 +20,7 @@ export default function Navbar() {
                         <>
                             <p>Welcome {user.userName}!</p>
                             <Link to="/login" onClick={logout}>
-                                <u>Logout</u>
+                                Logout
                             </Link>
                         </>
                     ) : (
