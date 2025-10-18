@@ -10,7 +10,7 @@ import Navbar from "../../components/navbar/Navbar";
 import StoryCard from '../../components/story/StoryCard';
 //import context
 import { useAuth } from "../../context/authContext/AuthContext";
-import { useUser } from "../../context/userContext/userContext";
+import { useUser } from "../../context/userContext/UserContext";
 
 export default function Home() {
   const { cookies, logout } = useAuth();

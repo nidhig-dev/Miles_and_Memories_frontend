@@ -78,9 +78,7 @@ export default function StoryDetail() {
             //  Construct FormData for multer
             const imageData = new FormData();
             imageData.append("image_story", image); // name I gave in multer field name
-           
-            console.log(imageData);
-           
+         
             let res = await axios.post("http://localhost:3000/api/image", imageData)
                 
 

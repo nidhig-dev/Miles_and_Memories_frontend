@@ -19,7 +19,7 @@ export default function Navbar() {
                     {user ? (
                         <>
                             <p>Welcome {user.userName}!</p>
-                            <Link to="/login" onClick={logout}>
+                            <Link to="/" onClick={logout}>
                                 Logout
                             </Link>
                         </>

@@ -19,7 +19,7 @@ export default function Signup() {
 
 
   function handleClick(e) {
-    navigate("/login")
+    navigate("/")
   }
   function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });

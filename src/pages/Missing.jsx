@@ -13,7 +13,7 @@ export default function Missing() {
         </div>
         <div className={style.loginClass}><div>
             <h1>404:Page not found</h1>
-            <Link to="/login">Go back to home page</Link>
+            <Link to="/">Go back to home page</Link>
           </div>
         </div>
       </div>
