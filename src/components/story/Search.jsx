@@ -8,13 +8,14 @@ import { useAuth } from "../../context/authContext/AuthContext";
 import { useUser } from "../../context/userContext/UserContext";
 
 
-export default function Search({setStories,setIsSearch}) {
+export default function Search({ setStories, setIsSearch }) {
     const [search, setSearch] = useState("");
+    const [errorMsg, setErrorMsg] = useState("");
     const { cookies, logout } = useAuth();
-   
+
     const nav = useNavigate();
     //const { setUser } = useUser();
-   // const { storyInfo, setStoryInfo } = useStory();
+    // const { storyInfo, setStoryInfo } = useStory();
     //const [isEdit, setIsEdit] = useState(false);
     //const { id } = useParams();
 
@@ -37,24 +38,36 @@ export default function Search({setStories,setIsSearch}) {
     // }
 
     function handleChange(e) {
-        setSearch(e.target.value);
+        //if error msg was displayed earlier and user types new search make the error msg disappear
+        setErrorMsg("");
+        setSearch(e.target.value);       
     }
     async function handleSearch(e) {
         e.preventDefault();
         try {
-            const keyword=search;
-            const res= await axios.get(`http://localhost:3000/api/story/keyword/search`, {
+            const keyword = search;
+            const res = await axios.get(`http://localhost:3000/api/story/keyword/search`, {
                 params: { keyword },
                 headers: { "x-auth-token": cookies.token },
             })
-            console.log("search story is",res.data);
+            console.log("search story is", res.data);
             setStories(res.data);
             setSearch("");
             setIsSearch(true);
             // nav("/dashboard");
         }
         catch (err) {
-            console.error(err);
+            if (err.response) {
+                setSearch("");
+                setErrorMsg(err.response.data.errors[0].msg);
+            }
+            else {
+                setSearch("");
+                setErrorMsg("No story found");
+            }
+            console.error(err.response.data.errors[0].msg);
+
+            // console.error(err);
         }
 
     }
@@ -68,6 +81,13 @@ export default function Search({setStories,setIsSearch}) {
                     value={search}
                     onChange={handleChange}
                 />
+                {(errorMsg) &&
+                    <p style={{
+                        color: "red",
+                        fontSize: "0.8rem",
+                        marginTop: "0",
+                    }}>{errorMsg}</p>
+                }
                 <input type="submit"
                     className={style.btnPrimary}
                     value="Search" />

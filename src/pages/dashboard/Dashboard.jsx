@@ -48,9 +48,7 @@ export default function Home() {
       setStories(res.data);
     }
     catch (err) {
-      //logout();
-      console.error(err);
-      //err.response.data.errors[0].msg);
+      console.error(err);     
     }
   }
   useEffect(() => {

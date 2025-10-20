@@ -9,16 +9,16 @@ dayjs.extend(advancedFormat);
 
 
 
-export default function StoryCard({ _id,imageUrl, title, visitedDate, desc, visitedLocation }) {
-    const nav=useNavigate();
+export default function StoryCard({ _id, imageUrl, title, visitedDate, desc, visitedLocation }) {
+    const nav = useNavigate();
     // 6th June 2024
     const formattedDate = dayjs(visitedDate).format("Do MMMM YYYY");
-    function handleClick(){
+    function handleClick() {
         nav(`/storydetail/${_id}`);
 
     }
     return (
-        <div onClick={handleClick}className={style.oneStoryCard}>
+        <div onClick={handleClick} className={style.oneStoryCard}>
             <img src={imageUrl}
                 alt={title}
             />
@@ -27,15 +27,21 @@ export default function StoryCard({ _id,imageUrl, title, visitedDate, desc, visi
                 <span>{formattedDate}</span>
             </div>
             <div className={style.descClass}>
-                <span>{desc.slice(0,60)}...</span>
+                <span>{desc.slice(0, 60)}...</span>
             </div>
 
             <div className={style.storyLocation}>
                 <BiCurrentLocation className={style.locationIcon} />
                 {visitedLocation.map((location, i) => (
-                <span>
-                    {location} 
-                    </span> ))}
+                    (i==visitedLocation.length-1)?
+                    <span key={i}>
+                        {location}
+                    </span>:
+                        <span key={i}>
+                            {location},
+                        </span>
+                    
+                ))}
             </div>
         </div>
     )

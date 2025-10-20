@@ -4,6 +4,10 @@ A responsive and modern **React + Vite** frontend for the **Travel Journal App**
 
 ---
 
+
+## Link for Git Repo Backend
+
+
 ## 🧰 Tech Stack
 
 | Category | Technology |
@@ -23,6 +27,7 @@ A responsive and modern **React + Vite** frontend for the **Travel Journal App**
 ## ⚙️ Installation & Setup
 
 ### 1️⃣ Initialize a new Vite React app
+
 ```bash
 npm create vite@latest .
 ```
@@ -34,6 +39,7 @@ Framework: React
 Variant: JavaScript
 
 2️⃣ Install Dependencies
+
 ``` bash
 npm install
 npm i react-router-dom
@@ -45,6 +51,7 @@ npm install react-icons
 🚀 Run the Frontend
 
 Start the development server:
+
 ``` bash
 npm run dev
 ```
@@ -63,19 +70,18 @@ Open your browser at [http://localhost:5173](http://localhost:5173)
 | ------------------- | ----------------------------------------------------------- |
 | **Login.jsx**       | User login form with authentication                         |
 | **Signup.jsx**      | Registration form for new users                             |
-| **Dashboard.jsx**   | Displays all user stories in grid or list format            |
+| **Dashboard.jsx**   | Displays all user stories in grid format                    |
 | **AddStory.jsx**    | Form for creating a new story (with image upload)           |
 | **StoryDetail.jsx** | Shows detailed view of a single story                       |
-| **EditStory.jsx**   | (Component & Page) Edits an existing story’s text and image |
 | **Missing.jsx**     | Fallback “404” page for invalid routes                      |
 
 
 ### 🧩 Components Overview
 | Component               | Description                                                          |
 | ----------------------- | -------------------------------------------------------------------- |
-| **Navbar.jsx**          | Displays navigation links (home, dashboard, add story, logout, etc.) |
+| **Navbar.jsx**          | Displays logo, welcome msg and logout link                           |
 | **EditStory.jsx**       | Form to edit an existing story and update image                      |
-| **StoryCard.jsx**       | Reusable component displaying each user story on the dashboard       |
+| **StoryCard.jsx**       | Component displaying each user story on the dashboard                |
 | **ProtectedRoutes.jsx** | Restricts access to certain routes until the user is logged in       |
 
 ### 🧠 Context Overview
@@ -83,7 +89,7 @@ Open your browser at [http://localhost:5173](http://localhost:5173)
 | -------------------- | ----------------------------------------------------------------------------- |
 | **AuthContext.jsx**  | Manages global authentication state — sets or removes JWT token in cookies    |
 | **UserContext.jsx**  | Provides user information (`_id`, `name`, etc.) globally across components    |
-| **StoryContext.jsx** | Manages current story data and provides methods to update or reset story info |
+| **StoryContext.jsx** | Manages current story data and provides methods to update or delete story info |
 
 ### 🧭 Routing Structure
 | Path             | Component   | Access    |
@@ -135,11 +141,9 @@ You should see the custom "Page Not Found" screen.
 ### 🙌 Acknowledgements
 
 🎨 Color Palette Inspiration: Coolors.co
-
 🧭 API & Backend: Express + MongoDB
 💡 Icons: React Icons
-
-🔗 Run Both Servers Together
+🖋️ Fonts: Google Fonts
 
 
 ### Project requirements checklist
@@ -147,7 +151,7 @@ You should see the custom "Page Not Found" screen.
 - ✅4 pages (react-router-dom)
 - ✅Manage state using ReactHooks or other state MGMT tools (useState, useReducer, redux, useEffect)
 - ✅Full C.R.U.D capabilities from your DB
-- Documentation:
+- ✅Documentation:
 - ✅Well documented readme
 - ✅Full Commit history, 25 commits- ish
 - Presentation

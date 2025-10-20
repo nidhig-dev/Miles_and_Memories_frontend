@@ -34,26 +34,26 @@ export default function StoryDetail() {
     // 6th June 2024
     //const formattedDate = dayjs(storyInfo.visitedDate).format("Do MMMM YYYY");
     //get user info
-    async function getUserInfo() {
-        try {
-            let res = await axios.get("http://localhost:3000/api/user/profile", {
-                headers: { "x-auth-token": cookies.token },
-            });
-            console.log("res is", res.data);
-            //provide the user info to all children
-            setUser(res.data);
-        }
-        catch (err) {
-            logout();
-            console.error(err);
-            //err.response.data.errors[0].msg);
-        }
-    }
-    useEffect(() => {
-        if (cookies.token) {
-            getUserInfo();
-        }
-    }, [cookies.token])
+    // async function getUserInfo() {
+    //     try {
+    //         let res = await axios.get("http://localhost:3000/api/user/profile", {
+    //             headers: { "x-auth-token": cookies.token },
+    //         });
+    //         console.log("res is", res.data);
+    //         //provide the user info to all children
+    //         setUser(res.data);
+    //     }
+    //     catch (err) {
+    //         logout();
+    //         console.error(err);
+    //         //err.response.data.errors[0].msg);
+    //     }
+    // }
+    // useEffect(() => {
+    //     if (cookies.token) {
+    //         getUserInfo();
+    //     }
+    // }, [cookies.token])
 
 
     function handleChange(e) {
@@ -73,6 +73,11 @@ export default function StoryDetail() {
     async function handleAdd(e) {
         e.preventDefault();
         try {
+            //split the visited location by comma and then map over each item and put it as an item in locationsArray
+            const locationsArray = addStory.visitedLocation.split(",")
+                .map((item) => item.trim())
+                .filter((item) => item !== "");
+
             console.log("token is", cookies.token);
             //call add image route to add image to uploads folder with the proper url
             //  Construct FormData for multer
@@ -89,7 +94,7 @@ export default function StoryDetail() {
                 title:addStory.title,
                 desc: addStory.desc,
                 visitedDate: addStory.visitedDate,
-                visitedLocation: addStory.visitedLocation,
+                visitedLocation: locationsArray,
 
             }, {
                 headers: { "x-auth-token": cookies.token                    
@@ -150,6 +155,7 @@ export default function StoryDetail() {
                                     type="date"
                                     value={addStory.visitedDate}
                                     name="visitedDate"
+                                    max={new Date().toISOString().split("T")[0]} //today's date as max
                                     onChange={handleChange} />
                             </div>
 

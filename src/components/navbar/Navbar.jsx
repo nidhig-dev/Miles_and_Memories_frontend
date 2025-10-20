@@ -7,8 +7,6 @@ import { useUser } from "../../context/userContext/UserContext";
 
 
 export default function Navbar() {
-    //const { user } = useAuth();
-    //console.log(user);
     const { user } = useUser();
     const { logout } = useAuth();
     return (

@@ -28,7 +28,7 @@ export default function StoryDetail() {
     const { storyInfo, setStoryInfo } = useStory();
     const [isEdit, setIsEdit] = useState(false);
     const { id } = useParams();
-    
+
     console.log("story id is", id);
     // to display in format 6th June 2024
     //If no story then handle it
@@ -36,24 +36,24 @@ export default function StoryDetail() {
         ? dayjs(storyInfo.visitedDate).format("Do MMMM YYYY")
         : "";
 
-    
+
 
     //get user info
-    async function getUserInfo() {
-        try {
-            let res = await axios.get("http://localhost:3000/api/user/profile", {
-                headers: { "x-auth-token": cookies.token },
-            });
-            console.log("res is", res.data);
-            //provide the user info to all children
-            setUser(res.data);
-        }
-        catch (err) {
-            logout();
-            console.error(err);
-            //err.response.data.errors[0].msg);
-        }
-    }
+    // async function getUserInfo() {
+    //     try {
+    //         let res = await axios.get("http://localhost:3000/api/user/profile", {
+    //             headers: { "x-auth-token": cookies.token },
+    //         });
+    //         console.log("res is", res.data);
+    //         //provide the user info to all children
+    //         setUser(res.data);
+    //     }
+    //     catch (err) {
+    //         logout();
+    //         console.error(err);
+    //         //err.response.data.errors[0].msg);
+    //     }
+    // }
     //get story detail
     async function getStoryDetail() {
         try {
@@ -71,7 +71,7 @@ export default function StoryDetail() {
     }
     useEffect(() => {
         if (cookies.token) {
-            getUserInfo();
+            // getUserInfo();
             getStoryDetail();
         }
     }, [cookies.token, id])
@@ -117,7 +117,18 @@ export default function StoryDetail() {
                                     <span>{storyInfo.desc}</span>
                                     <div className={style.storyLocation}>
                                         <BiCurrentLocation className={style.locationIcon} />
-                                        {storyInfo.visitedLocation}
+                                        {storyInfo.visitedLocation.map((location, i) => (
+
+                                            (i == storyInfo.visitedLocation.length - 1) ?
+                                                <span key={i} 
+                                                      style={{ color: "var(--buttonSecondaryColor)" }}>
+                                                    {location}
+                                                </span> :
+                                                <span key={i} 
+                                                      style={{ color: "var(--buttonSecondaryColor)" }}>
+                                                    {location},
+                                                </span>
+                                        ))}
                                     </div>
                                 </div>
                             </div>

@@ -19,69 +19,81 @@ export default function EditStory() {
         imageUrl: storyInfo.imageUrl,
         title: storyInfo.title,
         desc: storyInfo.desc,
-        // changing the date format 6th october 2017 to 2017-10-06 to be compatible with calender Date field
+        // changing the date format from 6th october 2017 to 2017-10-06 to be compatible with calender Date field
         visitedDate: dayjs(storyInfo.visitedDate).format("YYYY-MM-DD"),
-        visitedLocation: storyInfo.visitedLocation,
+        //if loction is an array (from backend), convert to string so that split later works
+        visitedLocation: Array.isArray(storyInfo.visitedLocation)
+            ? storyInfo.visitedLocation.join(",") 
+            : storyInfo.visitedLocation,
+
+        // visitedLocation: storyInfo.visitedLocation,
     });
+    //This state will check if the user has updated image or other fields
     const [updateImage, setUpdateImage] = useState(false);
     const [image, setImage] = useState(null);
-
+    //This displays the preview of the image that is uploaded by the user from their device
     const [preview, setPreview] = useState("");
 
     const nav = useNavigate();
     const { id } = useParams();
-    console.log("story id is", id);
-    // 6th June 2024
-    const formattedDate = dayjs(storyInfo.visitedDate).format("Do MMMM YYYY");
 
 
     function handleChange(e) {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     }
 
+
     // handle image selection
     function handleFileChange(e) {
+        //get the uploaded image
         const file = e.target.files[0];
         setImage(file);
+        //if image is uploaded then set preview
         if (file) {
-            setPreview(URL.createObjectURL(file)); // shows preview
+            setPreview(URL.createObjectURL(file));
         }
 
     }
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            // console.log(storyInfo.imageUrl);
-            console.log("id is", id);
-            console.log("token is", cookies.token);
+            console.log(formData)
+            console.log("location:", formData.visitedLocation);
+            //split the visited location by comma and then map over each item and put it as an item in locationsArray
+            const locationsArray = formData.visitedLocation.split(",")
+                .map((item) => item.trim())
+                .filter((item) => item !== "");
+            console.log("location is", locationsArray);
 
-            if(updateImage){
-            const imageData = new FormData();
-            imageData.append("image_story", image); // name I gave in multer field name
-
-            console.log(imageData);
-
-            let res = await axios.post("http://localhost:3000/api/image", imageData)
-
-
-            const imageUrl = res.data;
-            
-            await axios.put(`http://localhost:3000/api/story/${id}`, {
-                imageUrl: imageUrl,
-                title: formData.title,
-                desc: formData.desc,
-                visitedDate: formData.visitedDate,
-                visitedLocation: formData.visitedLocation,
-            }, {
-                headers: { "x-auth-token": cookies.token },
-            })
-        }
-        else{
-                await axios.put(`http://localhost:3000/api/story/${id}`, formData, {
+            //if user has updated image append the image to formdata and send to backend
+            if (updateImage) {
+                const imageData = new FormData();
+                imageData.append("image_story", image); // name I gave in multer field name
+                //Call upload image route
+                let res = await axios.post("http://localhost:3000/api/image", imageData)
+                //get the newly created url   
+                const imageUrl = res.data;
+                //update the story with new url and if any text fields are changed, update them too
+                await axios.put(`http://localhost:3000/api/story/${id}`, {
+                    imageUrl: imageUrl,
+                    title: formData.title,
+                    desc: formData.desc,
+                    visitedDate: formData.visitedDate,
+                    visitedLocation: locationsArray,
+                }, {
+                    headers: { "x-auth-token": cookies.token },
+                })
+            }
+            //if only text fields are changed
+            else {
+                await axios.put(`http://localhost:3000/api/story/${id}`, {
+                    ...formData,
+                    visitedLocation: locationsArray,
+                }, {
                     headers: { "x-auth-token": cookies.token },
                 })
 
-        }
+            }
             nav("/dashboard");
         }
         catch (err) {
@@ -90,6 +102,7 @@ export default function EditStory() {
 
     }
     function handleUpdateImage() {
+        //if image is updated, set the state to true
         setUpdateImage(true);
     }
     return (
@@ -98,42 +111,44 @@ export default function EditStory() {
                 <div className={style.storyCard}>
                     <form onSubmit={handleSubmit}>
 
-                        {(!updateImage) ?
-                            <>
-                                <div className={style.imageContainer}>
-                                    <img src={storyInfo.imageUrl}
-                                        alt={storyInfo.title}
-                                    />
-                                    <button class={style.imageButtons}
-                                        type="button"
-                                        onClick={handleUpdateImage}
-                                    >Change Image</button>
-                                </div>
-
-                            </> :
-                            <>
-                                <div>
-                                    <label >Choose an Image: </label>
-                                    <input className={style.fileInput}
-                                        type="file"
-                                        name="image_story"
-                                        accept="image/*"
-                                        onChange={handleFileChange} />
-                                    {preview && (
-                                        <img
-                                            src={preview}
-                                            alt="Preview"
-                                            style={{
-                                                width: "100%",
-                                                marginTop: "10px",
-                                                borderRadius: "8px",
-                                                maxHeight: "300px",
-                                                objectFit: "cover",
-                                            }}
+                        {//if the user has not yet clicked on change image, show them the image with change image button
+                            //else give them option to choose image and show preview 
+                            (!updateImage) ?
+                                <>
+                                    <div className={style.imageContainer}>
+                                        <img src={storyInfo.imageUrl}
+                                            alt={storyInfo.title}
                                         />
-                                    )}
-                                </div>
-                            </>
+                                        <button class={style.imageButtons}
+                                            type="button"
+                                            onClick={handleUpdateImage}
+                                        >Change Image</button>
+                                    </div>
+
+                                </> :
+                                <>
+                                    <div>
+                                        <label >Choose an Image: </label>
+                                        <input className={style.fileInput}
+                                            type="file"
+                                            name="image_story"
+                                            accept="image/*"
+                                            onChange={handleFileChange} />
+                                        {preview && (
+                                            <img
+                                                src={preview}
+                                                alt="Preview"
+                                                style={{
+                                                    width: "100%",
+                                                    marginTop: "10px",
+                                                    borderRadius: "8px",
+                                                    maxHeight: "300px",
+                                                    objectFit: "cover",
+                                                }}
+                                            />
+                                        )}
+                                    </div>
+                                </>
                         }
 
 
@@ -154,6 +169,7 @@ export default function EditStory() {
                                     required
                                     value={formData.visitedDate}
                                     name="visitedDate"
+                                    max={new Date().toISOString().split("T")[0]} //today's date as max
                                     onChange={handleChange} />
                             </div>
                             <div className={style.gridClass}>
@@ -181,20 +197,21 @@ export default function EditStory() {
 
                     </form>
                 </div>
-                 {(!updateImage) ?
-                    <div className={style.btnContainer}>
-                        <button className={style.btnPrimary}
-                            onClick={() => nav("/dashboard")} >back</button>
-                    </div>
+                {//navigate to dashboard on back
+                    (!updateImage) ?
+                        <div className={style.btnContainer}>
+                            <button className={style.btnPrimary}
+                                onClick={() => nav("/dashboard")} >back</button>
+                        </div>
 
-                    :
-                    //undo
-                    <div className={style.btnContainer}>
-                        <button className={style.btnPrimary}
-                            onClick={() => window.location.reload()}>back</button>
-                    </div>               
+                        :
+                        //reload the page on back
+                        <div className={style.btnContainer}>
+                            <button className={style.btnPrimary}
+                                onClick={() => window.location.reload()}>back</button>
+                        </div>
                 }
- 
+
             </div>
 
         </div>
