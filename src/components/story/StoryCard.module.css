@@ -83,7 +83,7 @@
 .rightSection {
     flex: 1;
     margin-left: 30px;
-    background-color: #fafafa;
+    background-color: none;
     padding: 20px;
     border-radius: 10px;
 }
@@ -128,6 +128,27 @@
     /* background-color: #05B6D3; */
     color: var(--buttonPrimaryBackground);
     font-size: 50px;
+}
 
 
+.btnBack {
+    flex: 1;
+    min-width: 110px;
+    margin-top:25px;
+    background-color: var(--buttonPrimaryBackground);
+    border: 1px none #ccc;
+    border-radius: 10px;
+    padding: 0.5rem;
+    height: 12%;
+    width: 45%;
+    outline: none;
+    font-size: .8em;
+    color: var(--buttonPrimaryColor);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btnBack:hover {
+    background-color: var(--buttonSecondaryBackground);
+    color: var(--buttonSecondaryColor);
 }

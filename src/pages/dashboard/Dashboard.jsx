@@ -8,6 +8,7 @@ import { useNavigate } from 'react-router-dom';
 //import components
 import Navbar from "../../components/navbar/Navbar";
 import StoryCard from '../../components/story/StoryCard';
+import Search from "../../components/story/Search";
 //import context
 import { useAuth } from "../../context/authContext/AuthContext";
 import { useUser } from "../../context/userContext/UserContext";
@@ -16,7 +17,9 @@ export default function Home() {
   const { cookies, logout } = useAuth();
   const { setUser } = useUser();
   const [stories, setStories] = useState([]);
-  const nav=useNavigate();
+  const [isSearch, setIsSearch] = useState(false);
+
+  const nav = useNavigate();
 
   //get user info
   async function getUserInfo() {
@@ -60,6 +63,12 @@ export default function Home() {
   function handleAdd() {
     nav("/addstory")
   }
+
+  function handleBack(){
+    setIsSearch(false);
+    getUserStories();
+    
+  }
   return (
     <>
       <Navbar />
@@ -70,22 +79,31 @@ export default function Home() {
               <StoryCard key={story.title} {...story} />
             ))
             :
-            <> 
-            <div className={style.emptyStoryCard}>
-              <div className={style.createClass}>
-                <IoCreate className={style.createStoryLogo}/> 
-                <p>Create new story</p>     
+            <>
+              <div className={style.emptyStoryCard}>
+                <div className={style.createClass}>
+                  <IoCreate className={style.createStoryLogo} />
+                  <p>Create new story</p>
                 </div>
-                    </div>
+              </div>
             </>
           }
         </div>
         <div className={style.rightSection}>
+          <Search setStories={setStories} setIsSearch={setIsSearch} />
+          {(isSearch) &&         
+          <>
+            <button className={style.btnBack}
+                onClick={handleBack}>back</button>
+            
+          </>
+            
+          }          
           <div className={style.addLogo}>
             <MdAddCircle onClick={handleAdd} className={style.addIcon} />
-            
-          </div>
           
+          </div>
+
         </div>
 
       </div>
