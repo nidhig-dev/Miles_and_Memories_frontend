@@ -5,42 +5,17 @@ import axios from "axios";
 
 //import context
 import { useAuth } from "../../context/authContext/AuthContext";
-import { useUser } from "../../context/userContext/UserContext";
 
-
+//This function sends the search keyword to the backend and displays the stories, if found
 export default function Search({ setStories, setIsSearch }) {
     const [search, setSearch] = useState("");
     const [errorMsg, setErrorMsg] = useState("");
     const { cookies, logout } = useAuth();
-
-    const nav = useNavigate();
-    //const { setUser } = useUser();
-    // const { storyInfo, setStoryInfo } = useStory();
-    //const [isEdit, setIsEdit] = useState(false);
-    //const { id } = useParams();
-
-
-    // //get user info
-    // async function getUserInfo() {
-    //     try {
-    //         let res = await axios.get("http://localhost:3000/api/user/profile", {
-    //             headers: { "x-auth-token": cookies.token },
-    //         });
-    //         console.log("res is", res.data);
-    //         //provide the user info to all children
-    //         setUser(res.data);
-    //     }
-    //     catch (err) {
-    //         logout();
-    //         console.error(err);
-    //         //err.response.data.errors[0].msg);
-    //     }
-    // }
-
+    
     function handleChange(e) {
-        //if error msg was displayed earlier and user types new search make the error msg disappear
+        //if error msg was displayed earlier and user types new search keyword, make the error msg disappear
         setErrorMsg("");
-        setSearch(e.target.value);       
+        setSearch(e.target.value);
     }
     async function handleSearch(e) {
         e.preventDefault();
@@ -50,11 +25,9 @@ export default function Search({ setStories, setIsSearch }) {
                 params: { keyword },
                 headers: { "x-auth-token": cookies.token },
             })
-            console.log("search story is", res.data);
             setStories(res.data);
             setSearch("");
             setIsSearch(true);
-            // nav("/dashboard");
         }
         catch (err) {
             if (err.response) {
@@ -66,8 +39,6 @@ export default function Search({ setStories, setIsSearch }) {
                 setErrorMsg("No story found");
             }
             console.error(err.response.data.errors[0].msg);
-
-            // console.error(err);
         }
 
     }
@@ -81,6 +52,7 @@ export default function Search({ setStories, setIsSearch }) {
                     value={search}
                     onChange={handleChange}
                 />
+                {/* display the error message if any */}
                 {(errorMsg) &&
                     <p style={{
                         color: "red",

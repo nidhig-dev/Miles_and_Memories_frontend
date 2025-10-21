@@ -18,52 +18,26 @@ import EditStory from "../../components/story/EditStory";
 
 dayjs.extend(advancedFormat);
 
-
-
 export default function StoryDetail() {
-    const { cookies, logout } = useAuth();
-
+    const { cookies } = useAuth();
     const nav = useNavigate();
-    const { setUser } = useUser();
     const { storyInfo, setStoryInfo } = useStory();
     const [isEdit, setIsEdit] = useState(false);
+    //get id from the url
     const { id } = useParams();
 
-    console.log("story id is", id);
-    // to display in format 6th June 2024
-    //If no story then handle it
+    //display in format 6th June 2024
+    //If no user has no story then set empty
     const formattedDate = storyInfo
         ? dayjs(storyInfo.visitedDate).format("Do MMMM YYYY")
         : "";
-
-
-
-    //get user info
-    // async function getUserInfo() {
-    //     try {
-    //         let res = await axios.get("http://localhost:3000/api/user/profile", {
-    //             headers: { "x-auth-token": cookies.token },
-    //         });
-    //         console.log("res is", res.data);
-    //         //provide the user info to all children
-    //         setUser(res.data);
-    //     }
-    //     catch (err) {
-    //         logout();
-    //         console.error(err);
-    //         //err.response.data.errors[0].msg);
-    //     }
-    // }
     //get story detail
     async function getStoryDetail() {
         try {
-            console.log("token is", cookies.token);
             let res = await axios.get(`http://localhost:3000/api/story/${id}`, {
                 headers: { "x-auth-token": cookies.token },
             });
-            console.log("story res is", res.data);
             setStoryInfo(res.data);
-            console.log(res.data.visitedLocation);
         }
         catch (err) {
             console.error(err);
@@ -71,16 +45,14 @@ export default function StoryDetail() {
     }
     useEffect(() => {
         if (cookies.token) {
-            // getUserInfo();
             getStoryDetail();
         }
     }, [cookies.token, id])
 
     function handleEdit() {
         setIsEdit(true);
-
     }
-
+    //delete a user story
     async function handleDelete() {
         try {
             await axios.delete(`http://localhost:3000/api/story/${id}`, {
@@ -120,12 +92,12 @@ export default function StoryDetail() {
                                         {storyInfo.visitedLocation.map((location, i) => (
 
                                             (i == storyInfo.visitedLocation.length - 1) ?
-                                                <span key={i} 
-                                                      style={{ color: "var(--buttonSecondaryColor)" }}>
+                                                <span key={i}
+                                                    style={{ color: "var(--buttonSecondaryColor)" }}>
                                                     {location}
                                                 </span> :
-                                                <span key={i} 
-                                                      style={{ color: "var(--buttonSecondaryColor)" }}>
+                                                <span key={i}
+                                                    style={{ color: "var(--buttonSecondaryColor)" }}>
                                                     {location},
                                                 </span>
                                         ))}

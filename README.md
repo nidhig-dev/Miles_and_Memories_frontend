@@ -7,6 +7,8 @@ A responsive and modern **React + Vite** frontend for the **Travel Journal App**
 
 ## Link for Git Repo Backend
 
+[https://github.com/nidhig-dev/Miles_and_Memories_backend.git](https://github.com/nidhig-dev/Miles_and_Memories_backend.git)
+
 
 ## 🧰 Tech Stack
 
@@ -15,7 +17,7 @@ A responsive and modern **React + Vite** frontend for the **Travel Journal App**
 | **Framework** | React (Vite) |
 | **Routing** | React Router DOM |
 | **State Management** | Context API |
-| **useState/useEffect/useMemo** | React hooks for state and side effects       |
+| **useState/useEffect/useMemo/useRef** | React hooks for state and side effects       |
 | **HTTP Client** | Axios |
 | **Cookies Handling** | react-cookie |
 | **Date Library** | Day.js |

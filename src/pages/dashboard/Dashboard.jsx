@@ -18,7 +18,9 @@ export default function Home() {
   const { setUser } = useUser();
   const [stories, setStories] = useState([]);
   const [isSearch, setIsSearch] = useState(false);
-
+  //when navigation returns to this page after deleting or updating a story, and stories are still being fetched from backend, to avoid 
+  // showing create a story sign even though user has stories.
+  const [loading, setLoading] = useState(true);
   const nav = useNavigate();
 
   //get user info
@@ -27,28 +29,29 @@ export default function Home() {
       let res = await axios.get("http://localhost:3000/api/user/profile", {
         headers: { "x-auth-token": cookies.token },
       });
-      console.log("res is", res.data);
       //provide the user info to all children
       setUser(res.data);
     }
     catch (err) {
       logout();
-      console.error(err);
-      //err.response.data.errors[0].msg);
+      console.error(err);      
     }
   }
   //get user stories
   async function getUserStories() {
     try {
-      console.log("token is", cookies.token);
+      setLoading(true);
       let res = await axios.get("http://localhost:3000/api/story", {
         headers: { "x-auth-token": cookies.token },
       });
-      console.log("story res is", res.data);
       setStories(res.data);
+      setLoading(false);
     }
     catch (err) {
       console.error(err);     
+    }
+    finally {
+      setLoading(false); 
     }
   }
   useEffect(() => {
@@ -64,19 +67,22 @@ export default function Home() {
 
   function handleBack(){
     setIsSearch(false);
-    getUserStories();
-    
+    getUserStories();    
   }
   return (
     <>
       <Navbar />
       <div className={style.mainContainer}>
         <div className={style.storyCard}>
-          {(stories.length > 0) ?
+          {
+          loading ? (
+            <p>Loading...</p>
+          ) : (stories.length > 0) ?
             stories.map((story) => (
               <StoryCard key={story.title} {...story} />
             ))
-            :
+            : 
+            // showing empty story card with a msg
             <>
               <div className={style.emptyStoryCard}>
                 <div className={style.createClass}>

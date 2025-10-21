@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../../context/authContext/AuthContext";
 import { useUser } from "../../context/userContext/UserContext";
 
-
+//This function displays logo and user name along with logout link
 export default function Navbar() {
     const { user } = useUser();
     const { logout } = useAuth();

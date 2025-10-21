@@ -7,15 +7,12 @@ import { useNavigate } from "react-router-dom";
 
 dayjs.extend(advancedFormat);
 
-
-
 export default function StoryCard({ _id, imageUrl, title, visitedDate, desc, visitedLocation }) {
     const nav = useNavigate();
-    // 6th June 2024
+    // converting to format 6th June 2024
     const formattedDate = dayjs(visitedDate).format("Do MMMM YYYY");
     function handleClick() {
         nav(`/storydetail/${_id}`);
-
     }
     return (
         <div onClick={handleClick} className={style.oneStoryCard}>
@@ -39,8 +36,7 @@ export default function StoryCard({ _id, imageUrl, title, visitedDate, desc, vis
                     </span>:
                         <span key={i}>
                             {location},
-                        </span>
-                    
+                        </span>                    
                 ))}
             </div>
         </div>

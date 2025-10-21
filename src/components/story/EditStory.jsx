@@ -11,30 +11,31 @@ import { useStory } from '../../context/storyContext/StoryContext';
 
 dayjs.extend(advancedFormat);
 
-
+//This function edits a user story
 export default function EditStory() {
     const { cookies } = useAuth();
     const { storyInfo } = useStory();
+    //initialize the story data to state 
     const [formData, setFormData] = useState({
         imageUrl: storyInfo.imageUrl,
         title: storyInfo.title,
         desc: storyInfo.desc,
         // changing the date format from 6th october 2017 to 2017-10-06 to be compatible with calender Date field
         visitedDate: dayjs(storyInfo.visitedDate).format("YYYY-MM-DD"),
-        //if loction is an array (from backend), convert to string so that split later works
+        //if loction is an array (from backend), convert to string so that split method can work(below)
         visitedLocation: Array.isArray(storyInfo.visitedLocation)
             ? storyInfo.visitedLocation.join(",") 
-            : storyInfo.visitedLocation,
-
-        // visitedLocation: storyInfo.visitedLocation,
+            : storyInfo.visitedLocation,        
     });
     //This state will check if the user has updated image or other fields
     const [updateImage, setUpdateImage] = useState(false);
+    //This state sets an image
     const [image, setImage] = useState(null);
     //This displays the preview of the image that is uploaded by the user from their device
     const [preview, setPreview] = useState("");
 
     const nav = useNavigate();
+    //get the story id from url
     const { id } = useParams();
 
 
@@ -57,14 +58,11 @@ export default function EditStory() {
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            console.log(formData)
-            console.log("location:", formData.visitedLocation);
             //split the visited location by comma and then map over each item and put it as an item in locationsArray
             const locationsArray = formData.visitedLocation.split(",")
                 .map((item) => item.trim())
                 .filter((item) => item !== "");
-            console.log("location is", locationsArray);
-
+            
             //if user has updated image append the image to formdata and send to backend
             if (updateImage) {
                 const imageData = new FormData();
@@ -118,6 +116,7 @@ export default function EditStory() {
                                     <div className={style.imageContainer}>
                                         <img src={storyInfo.imageUrl}
                                             alt={storyInfo.title}
+                                            required
                                         />
                                         <button class={style.imageButtons}
                                             type="button"
@@ -169,7 +168,7 @@ export default function EditStory() {
                                     required
                                     value={formData.visitedDate}
                                     name="visitedDate"
-                                    max={new Date().toISOString().split("T")[0]} //today's date as max
+                                    max={new Date().toISOString().split("T")[0]} //can't be a future date
                                     onChange={handleChange} />
                             </div>
                             <div className={style.gridClass}>
