@@ -31,8 +31,8 @@ export default function Home() {
       setStories(res.data);
       setLoading(false);
     }
-    catch (err) {
-      console.error(err);     
+    catch (err) {      
+      console.error(err.message);     
     }
     finally {
       setLoading(false); 

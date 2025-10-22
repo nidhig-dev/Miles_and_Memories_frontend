@@ -9,7 +9,7 @@ import { useAuth } from "../../context/authContext/AuthContext";
 export default function Signup() {
   const { signUp } = useAuth();
   const navigate = useNavigate();
-  const userRef=useRef();
+  const userRef = useRef();
   const [formData, setFormData] = useState({
     userName: "",
     email: "",
@@ -53,7 +53,7 @@ export default function Signup() {
           password2: "",
         });
         userRef.current.focus();
-
+        console.error(err.response.data.errors[0].msg);
       }
       else {
         setdisplay("SignUp Failed");
@@ -64,8 +64,10 @@ export default function Signup() {
           password2: "",
         });
         userRef.current.focus();
+        console.error("SignUp Failed");
       }
-      console.error(err.response.data.errors[0].msg);
+
+
     }
   }
 
@@ -143,10 +145,10 @@ export default function Signup() {
               fontSize: "0.8rem"
             }}>Or</p>
 
-            <input type="submit"
-              value="LOGIN"
+            <button type="button"
               className={style.btnPrimary}
-              onClick={handleClick} />
+              onClick={handleClick}>LOGIN </button>
+
           </form>
         </div>
       </div>

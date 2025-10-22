@@ -1,4 +1,4 @@
-import { useState,useRef } from "react";
+import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import style from "./Auth.module.css";
 
@@ -8,7 +8,7 @@ import { useAuth } from "../../context/authContext/AuthContext";
 export default function Login() {
   const { login } = useAuth();
   const navigate = useNavigate();
-  const userRef=useRef();
+  const userRef = useRef();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -38,7 +38,8 @@ export default function Login() {
           email: "",
           password: "",
         });
-         userRef.current.focus();
+        userRef.current.focus();
+        console.error(err.response.data.errors[0].msg);
       }
       else {
         setdisplay("Login Failed");
@@ -46,9 +47,10 @@ export default function Login() {
           email: "",
           password: "",
         });
-         userRef.current.focus();
+        userRef.current.focus();
+        console.error("Login Failed");
       }
-      console.error(err.response.data.errors[0].msg);
+
     }
 
   }
@@ -101,11 +103,10 @@ export default function Login() {
               fontSize: "0.8rem"
             }}>Or</p>
 
-            <input type="submit"
-              value="CREATE ACCOUNT"
+            <button type="button"
               className={style.btnSecondary}
-              onClick={handleClick} />
-          </form>
+              onClick={handleClick}>CREATE ACCOUNT </button>
+            </form>
         </div>
       </div>
     </div>

@@ -14,7 +14,7 @@ export default function AuthProvider({ children }) {
     let res = await axios.post(`${connStr}/user/register`, formData);
     setCookies("token", res.data.token);    
   }
-//This function logs in a user and dets the token in cookies
+//This function logs in a user and sets the token in cookies
   async function login(formData) {
     let res = await axios.post(`${connStr}/user/login`, formData);
     setCookies("token", res.data.token);
