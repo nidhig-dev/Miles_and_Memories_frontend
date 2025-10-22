@@ -11,11 +11,9 @@ import StoryCard from '../../components/story/StoryCard';
 import Search from "../../components/story/Search";
 //import context
 import { useAuth } from "../../context/authContext/AuthContext";
-import { useUser } from "../../context/userContext/UserContext";
 
 export default function Home() {
-  const { cookies, logout } = useAuth();
-  const { setUser } = useUser();
+  const { cookies} = useAuth();
   const [stories, setStories] = useState([]);
   const [isSearch, setIsSearch] = useState(false);
   //when navigation returns to this page after deleting or updating a story, and stories are still being fetched from backend, to avoid 
@@ -23,20 +21,6 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const nav = useNavigate();
 
-  //get user info
-  async function getUserInfo() {
-    try {
-      let res = await axios.get("http://localhost:3000/api/user/profile", {
-        headers: { "x-auth-token": cookies.token },
-      });
-      //provide the user info to all children
-      setUser(res.data);
-    }
-    catch (err) {
-      logout();
-      console.error(err);      
-    }
-  }
   //get user stories
   async function getUserStories() {
     try {
@@ -56,7 +40,7 @@ export default function Home() {
   }
   useEffect(() => {
     if (cookies.token) {
-      getUserInfo();
+   //   getUserInfo();
       getUserStories();
     }
   }, [cookies.token])

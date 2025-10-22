@@ -118,7 +118,7 @@ export default function EditStory() {
                                             alt={storyInfo.title}
                                             required
                                         />
-                                        <button class={style.imageButtons}
+                                        <button className={style.imageButtons}
                                             type="button"
                                             onClick={handleUpdateImage}
                                         >Change Image</button>

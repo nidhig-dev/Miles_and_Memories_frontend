@@ -9,7 +9,6 @@ import axios from "axios";
 
 //import context
 import { useAuth } from "../../context/authContext/AuthContext";
-import { useUser } from "../../context/userContext/UserContext";
 import { useStory } from "../../context/storyContext/StoryContext";
 
 //import components
@@ -31,6 +30,7 @@ export default function StoryDetail() {
     const formattedDate = storyInfo
         ? dayjs(storyInfo.visitedDate).format("Do MMMM YYYY")
         : "";
+
     //get story detail
     async function getStoryDetail() {
         try {
@@ -104,7 +104,7 @@ export default function StoryDetail() {
                                     </div>
                                 </div>
                             </div>
-                            <div class={style.btnContainer}>
+                            <div className={style.btnContainer}>
                                 <button className={style.btnPrimary}
                                     onClick={handleEdit}>Edit</button>
                                 <button className={style.btnPrimary}

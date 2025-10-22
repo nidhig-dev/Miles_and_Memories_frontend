@@ -11,17 +11,14 @@ export default function AuthProvider({ children }) {
 //This function creates a new user and sets the token in cookies
   async function signUp(formData) {
 
-    console.log(formData);
     let res = await axios.post(`${connStr}/user/register`, formData);
-    console.log(res.data.token);
     setCookies("token", res.data.token);    
   }
 //This function logs in a user and dets the token in cookies
   async function login(formData) {
     let res = await axios.post(`${connStr}/user/login`, formData);
     setCookies("token", res.data.token);
-    console.log("res data is",res.data);      
-  }
+    }
 //This function logs out a user and removes the cookie
   function logout() {
     ["token"].forEach((token) => removeCookie(token));

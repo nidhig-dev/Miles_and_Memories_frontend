@@ -5,7 +5,6 @@ import axios from "axios";
 
 //import context
 import { useAuth } from "../../context/authContext/AuthContext";
-import { useUser } from "../../context/userContext/UserContext";
 
 //import components
 import Navbar from "../../components/navbar/Navbar";
@@ -22,6 +21,7 @@ export default function StoryDetail() {
     })
     const[image,setImage]=useState(null);
     const [preview, setPreview]=useState("");
+
     
     function handleChange(e) {
         setAddStory({ ...addStory, [e.target.name]: e.target.value });

@@ -10,6 +10,13 @@ A responsive and modern **React + Vite** frontend for the **Travel Journal App**
 [https://github.com/nidhig-dev/Miles_and_Memories_backend.git](https://github.com/nidhig-dev/Miles_and_Memories_backend.git)
 
 
+
+## Link for JIRA Project Management
+[JIRA](https://goyalnidhi.atlassian.net/jira/software/projects/MM/boards/3?atlOrigin=eyJpIjoiNzVjN2QwNmQzMTUzNDUzZjg5NDEwNmZhYjM1ODkwZGUiLCJwIjoiaiJ9)
+
+![alt text](<Screenshot 2025-10-21 145302.png>)
+
+
 ## 🧰 Tech Stack
 
 | Category | Technology |
@@ -59,6 +66,10 @@ npm run dev
 ```
 Open your browser at [http://localhost:5173](http://localhost:5173)
 
+### User email and password to login
+    william@gmail.com
+    123456
+
 ## 🗂️ Project Structure
 
 ![alt text](<Screenshot 2025-10-17 224159.png>)
@@ -106,8 +117,10 @@ Open your browser at [http://localhost:5173](http://localhost:5173)
 ### 🔐 Authentication Flow
 
 User logs in using credentials (email, password) → token is received from backend.
+
 or
-USer signs up for a new account using name, email, password→ token is received from backend.
+
+User signs up for a new account using name, email, password→ token is received from backend.
 
 Token is stored in cookies via react-cookie.
 
@@ -142,10 +155,13 @@ You should see the custom "Page Not Found" screen.
 
 ### 🙌 Acknowledgements
 
-🎨 Color Palette Inspiration: Coolors.co
-🧭 API & Backend: Express + MongoDB
-💡 Icons: React Icons
-🖋️ Fonts: Google Fonts
+    🎨 Color Palette Inspiration: Coolors.co
+
+    🧭 API & Backend: Express + MongoDB
+
+    💡 Icons: React Icons
+
+    🖋️ Fonts: Google Fonts
 
 
 ### Project requirements checklist
@@ -160,3 +176,5 @@ You should see the custom "Page Not Found" screen.
 - Extra Credit:
     - ✅using JIRA 1%    
     - ✅authentication 2%
+
+🛠️ Developed by Nidhi Goyal
