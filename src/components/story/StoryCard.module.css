@@ -87,6 +87,11 @@
     padding: 20px;
     border-radius: 10px;
 }
+.searchClass{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
 
 .addLogo {
     position: fixed;
@@ -94,8 +99,7 @@
     bottom: 20px;
     /* position from right */
     right: 100px;
-    /* lay on top of the page */
-    z-index: 1000;
+    
 }
 
 .addIcon {

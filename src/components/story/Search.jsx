@@ -62,7 +62,7 @@ export default function Search({ setStories, setIsSearch }) {
                 }
                 <input type="submit"
                     className={style.btnPrimary}
-                    value="Search" />
+                    value="Search" />               
             </form>
         </div>
     )

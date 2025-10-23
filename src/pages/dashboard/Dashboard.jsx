@@ -40,7 +40,6 @@ export default function Home() {
   }
   useEffect(() => {
     if (cookies.token) {
-   //   getUserInfo();
       getUserStories();
     }
   }, [cookies.token])
@@ -86,7 +85,7 @@ export default function Home() {
             
           </>
             
-          }          
+          }  
           <div className={style.addLogo}>
             <MdAddCircle onClick={handleAdd} className={style.addIcon} />
           
