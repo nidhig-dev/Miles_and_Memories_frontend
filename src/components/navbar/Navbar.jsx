@@ -15,7 +15,7 @@ export default function Navbar() {
     //get user info
     async function getUserInfo() {
         try {
-            let res = await axios.get("https://miles-and-memories-backend-1.onrender.com/api/user/profile", {
+            let res = await axios.get("http://localhost:3000/api/user/profile", {
                 headers: { "x-auth-token": cookies.token },
             });
             //provide the user info to all children

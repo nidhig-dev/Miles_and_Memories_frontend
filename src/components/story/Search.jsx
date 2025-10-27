@@ -21,7 +21,7 @@ export default function Search({ setStories, setIsSearch }) {
         e.preventDefault();
         try {
             const keyword = search;
-            const res = await axios.get(`https://miles-and-memories-backend-1.onrender.com/api/story/keyword/search`, {
+            const res = await axios.get(`http://localhost:3000/api/story/keyword/search`, {
                 params: { keyword },
                 headers: { "x-auth-token": cookies.token },
             })

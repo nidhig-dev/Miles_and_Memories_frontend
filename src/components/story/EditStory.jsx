@@ -68,11 +68,11 @@ export default function EditStory() {
                 const imageData = new FormData();
                 imageData.append("image_story", image); // name I gave in multer field name
                 //Call upload image route
-                let res = await axios.post("https://miles-and-memories-backend-1.onrender.com/api/image", imageData)
+                let res = await axios.post("http://localhost:3000/api/image", imageData)
                 //get the newly created url   
                 const imageUrl = res.data;
                 //update the story with new url and if any text fields are changed, update them too
-                await axios.put(`https://miles-and-memories-backend-1.onrender.com/api/story/${id}`, {
+                await axios.put(`http://localhost:3000/api/story/${id}`, {
                     imageUrl: imageUrl,
                     title: formData.title,
                     desc: formData.desc,
@@ -84,7 +84,7 @@ export default function EditStory() {
             }
             //if only text fields are changed
             else {
-                await axios.put(`https://miles-and-memories-backend-1.onrender.com/api/story/${id}`, {
+                await axios.put(`http://localhost:3000/api/story/${id}`, {
                     ...formData,
                     visitedLocation: locationsArray,
                 }, {

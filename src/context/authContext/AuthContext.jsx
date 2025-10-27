@@ -7,7 +7,7 @@ const AuthContext = createContext();
 export default function AuthProvider({ children }) {
   const [cookies, setCookies, removeCookie] = useCookies();
 
-  const connStr = "https://miles-and-memories-backend-1.onrender.com/api";
+  const connStr = "http://localhost:3000/api";
   //This function creates a new user and sets the token in cookies
   async function signUp(formData) {
 
