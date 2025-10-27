@@ -10,7 +10,7 @@ import StoryDetail from './pages/Story/StoryDetail.jsx';
 import AddStory from './pages/Story/AddStory.jsx';
 
 //import components
-import ProtectedRoutes from "./components/ProtectedRoutes";
+import ProtectedRoutes from "./components/ProtectedRoutes.jsx";
 
 
 function App() {
