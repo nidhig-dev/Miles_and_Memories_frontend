@@ -49,10 +49,10 @@ export default function StoryDetail() {
             const imageData = new FormData();
             imageData.append("image_story", image); // name I gave in multer field name
 
-            let res = await axios.post("https://miles-and-memories-backend.onrender.com/api/image", imageData);
+            let res = await axios.post("https://miles-and-memories-backend-1.onrender.com/api/image", imageData);
             const imageUrl = res.data;
 
-            await axios.post(`https://miles-and-memories-backend.onrender.com/api/story/`, {
+            await axios.post(`https://miles-and-memories-backend-1.onrender.com/api/story/`, {
                 imageUrl: imageUrl,
                 title: addStory.title,
                 desc: addStory.desc,

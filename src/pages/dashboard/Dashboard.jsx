@@ -25,7 +25,7 @@ export default function Home() {
   async function getUserStories() {
     try {
       setLoading(true);
-      let res = await axios.get("https://miles-and-memories-backend.onrender.com/api/story", {
+      let res = await axios.get("https://miles-and-memories-backend-1.onrender.com/api/story", {
         headers: { "x-auth-token": cookies.token },
       });
       setStories(res.data);
