@@ -34,7 +34,7 @@ export default function StoryDetail() {
     //get story detail
     async function getStoryDetail() {
         try {
-            let res = await axios.get(`http://localhost:3000/api/story/${id}`, {
+            let res = await axios.get(`https://miles-and-memories-backend.onrender.com/api/story/${id}`, {
                 headers: { "x-auth-token": cookies.token },
             });
             setStoryInfo(res.data);
@@ -55,7 +55,7 @@ export default function StoryDetail() {
     //delete a user story
     async function handleDelete() {
         try {
-            await axios.delete(`http://localhost:3000/api/story/${id}`, {
+            await axios.delete(`https://miles-and-memories-backend.onrender.com/api/story/${id}`, {
                 headers: { "x-auth-token": cookies.token },
             })
             nav("/dashboard");

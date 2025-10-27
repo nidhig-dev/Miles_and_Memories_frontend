@@ -24,8 +24,8 @@ export default function EditStory() {
         visitedDate: dayjs(storyInfo.visitedDate).format("YYYY-MM-DD"),
         //if loction is an array (from backend), convert to string so that split method can work(below)
         visitedLocation: Array.isArray(storyInfo.visitedLocation)
-            ? storyInfo.visitedLocation.join(",") 
-            : storyInfo.visitedLocation,        
+            ? storyInfo.visitedLocation.join(",")
+            : storyInfo.visitedLocation,
     });
     //This state will check if the user has updated image or other fields
     const [updateImage, setUpdateImage] = useState(false);
@@ -62,17 +62,17 @@ export default function EditStory() {
             const locationsArray = formData.visitedLocation.split(",")
                 .map((item) => item.trim())
                 .filter((item) => item !== "");
-            
+
             //if user has updated image append the image to formdata and send to backend
             if (updateImage) {
                 const imageData = new FormData();
                 imageData.append("image_story", image); // name I gave in multer field name
                 //Call upload image route
-                let res = await axios.post("http://localhost:3000/api/image", imageData)
+                let res = await axios.post("https://miles-and-memories-backend.onrender.com/api/image", imageData)
                 //get the newly created url   
                 const imageUrl = res.data;
                 //update the story with new url and if any text fields are changed, update them too
-                await axios.put(`http://localhost:3000/api/story/${id}`, {
+                await axios.put(`https://miles-and-memories-backend.onrender.com/api/story/${id}`, {
                     imageUrl: imageUrl,
                     title: formData.title,
                     desc: formData.desc,
@@ -84,7 +84,7 @@ export default function EditStory() {
             }
             //if only text fields are changed
             else {
-                await axios.put(`http://localhost:3000/api/story/${id}`, {
+                await axios.put(`https://miles-and-memories-backend.onrender.com/api/story/${id}`, {
                     ...formData,
                     visitedLocation: locationsArray,
                 }, {

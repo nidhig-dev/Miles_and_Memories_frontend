@@ -11,7 +11,7 @@ export default function Search({ setStories, setIsSearch }) {
     const [search, setSearch] = useState("");
     const [errorMsg, setErrorMsg] = useState("");
     const { cookies, logout } = useAuth();
-    
+
     function handleChange(e) {
         //if error msg was displayed earlier and user types new search keyword, make the error msg disappear
         setErrorMsg("");
@@ -21,7 +21,7 @@ export default function Search({ setStories, setIsSearch }) {
         e.preventDefault();
         try {
             const keyword = search;
-            const res = await axios.get(`http://localhost:3000/api/story/keyword/search`, {
+            const res = await axios.get(`https://miles-and-memories-backend.onrender.com/api/story/keyword/search`, {
                 params: { keyword },
                 headers: { "x-auth-token": cookies.token },
             })
@@ -62,7 +62,7 @@ export default function Search({ setStories, setIsSearch }) {
                 }
                 <input type="submit"
                     className={style.btnPrimary}
-                    value="Search" />               
+                    value="Search" />
             </form>
         </div>
     )

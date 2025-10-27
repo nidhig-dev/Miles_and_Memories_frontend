@@ -9,13 +9,13 @@ import { useUser } from "../../context/userContext/UserContext";
 
 //This function displays logo and user name along with logout link
 export default function Navbar() {
-    const { user,setUser } = useUser();
+    const { user, setUser } = useUser();
     const { cookies, logout } = useAuth();
 
     //get user info
     async function getUserInfo() {
         try {
-            let res = await axios.get("http://localhost:3000/api/user/profile", {
+            let res = await axios.get("https://miles-and-memories-backend.onrender.com/api/user/profile", {
                 headers: { "x-auth-token": cookies.token },
             });
             //provide the user info to all children

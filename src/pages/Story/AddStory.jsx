@@ -1,6 +1,6 @@
 import style from "./StoryDetail.module.css"
-import { useNavigate} from "react-router-dom";
-import { useState} from "react";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import axios from "axios";
 
 //import context
@@ -10,22 +10,22 @@ import { useAuth } from "../../context/authContext/AuthContext";
 import Navbar from "../../components/navbar/Navbar";
 
 export default function StoryDetail() {
-    const { cookies} = useAuth();
+    const { cookies } = useAuth();
     const nav = useNavigate();
     const [addStory, setAddStory] = useState({
-       imageUrl:"",
+        imageUrl: "",
         title: "",
         desc: "",
         visitedDate: "",
         visitedLocation: "",
     })
-    const[image,setImage]=useState(null);
-    const [preview, setPreview]=useState("");
+    const [image, setImage] = useState(null);
+    const [preview, setPreview] = useState("");
 
-    
+
     function handleChange(e) {
         setAddStory({ ...addStory, [e.target.name]: e.target.value });
-        
+
     }
 
     // handle image selection
@@ -34,7 +34,7 @@ export default function StoryDetail() {
         setImage(file);
         if (file) {
             setPreview(URL.createObjectURL(file)); // shows preview
-        }        
+        }
     }
     async function handleAdd(e) {
         e.preventDefault();
@@ -48,20 +48,21 @@ export default function StoryDetail() {
             //  Construct FormData for multer
             const imageData = new FormData();
             imageData.append("image_story", image); // name I gave in multer field name
-         
-            let res = await axios.post("http://localhost:3000/api/image", imageData);
-            const imageUrl=res.data;
-           
-            await axios.post(`http://localhost:3000/api/story/`, {
-                imageUrl:imageUrl,
-                title:addStory.title,
+
+            let res = await axios.post("https://miles-and-memories-backend.onrender.com/api/image", imageData);
+            const imageUrl = res.data;
+
+            await axios.post(`https://miles-and-memories-backend.onrender.com/api/story/`, {
+                imageUrl: imageUrl,
+                title: addStory.title,
                 desc: addStory.desc,
                 visitedDate: addStory.visitedDate,
                 visitedLocation: locationsArray,
             }, {
-                headers: { "x-auth-token": cookies.token                    
-                 },
-                
+                headers: {
+                    "x-auth-token": cookies.token
+                },
+
             })
             nav("/dashboard");
         }
@@ -76,7 +77,7 @@ export default function StoryDetail() {
 
             <div className={style.mainContainer}>
                 <div className={style.addStoryCard}>
-                    <form onSubmit={handleAdd}>                          
+                    <form onSubmit={handleAdd}>
                         <div className={style.contentClass}>
                             <div>
                                 <label >Choose an Image: </label>
@@ -145,9 +146,9 @@ export default function StoryDetail() {
                             </div>
 
                             <div className={style.gridSubmit}>
-                               <input className={style.btnSubmit}
-                                type="submit"
-                                value="Submit" />
+                                <input className={style.btnSubmit}
+                                    type="submit"
+                                    value="Submit" />
                             </div>
                         </div>
                     </form>

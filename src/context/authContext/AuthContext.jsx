@@ -6,20 +6,20 @@ const AuthContext = createContext();
 //This context signs in, logs in and logs out a user and provides/remove the token as global state for all children
 export default function AuthProvider({ children }) {
   const [cookies, setCookies, removeCookie] = useCookies();
- 
-  const connStr = "http://localhost:3000/api";
-//This function creates a new user and sets the token in cookies
+
+  const connStr = "https://miles-and-memories-backend.onrender.com/api";
+  //This function creates a new user and sets the token in cookies
   async function signUp(formData) {
 
     let res = await axios.post(`${connStr}/user/register`, formData);
-    setCookies("token", res.data.token);    
+    setCookies("token", res.data.token);
   }
-//This function logs in a user and sets the token in cookies
+  //This function logs in a user and sets the token in cookies
   async function login(formData) {
     let res = await axios.post(`${connStr}/user/login`, formData);
     setCookies("token", res.data.token);
-    }
-//This function logs out a user and removes the cookie
+  }
+  //This function logs out a user and removes the cookie
   function logout() {
     ["token"].forEach((token) => removeCookie(token));
   }
@@ -29,7 +29,7 @@ export default function AuthProvider({ children }) {
     login,
     signUp,
     logout,
-    
+
   }), [cookies]);
   return (
     <div>
