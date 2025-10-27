@@ -2,12 +2,12 @@ import './App.css'
 import { Routes, Route } from 'react-router-dom';
 
 //import pages
-import Login from "./pages/auth/Login";
-import Signup from "./pages/auth/Signup";
-import Dashboard from "./pages/dashboard/Dashboard";
-import Missing from "./pages/Missing";
-import StoryDetail from './pages/Story/StoryDetail';
-import AddStory from './pages/Story/AddStory';
+import Login from "./pages/auth/Login.jsx";
+import Signup from "./pages/auth/Signup.jsx";
+import Dashboard from "./pages/dashboard/Dashboard.jsx";
+import Missing from "./pages/Missing.jsx";
+import StoryDetail from './pages/Story/StoryDetail.jsx';
+import AddStory from './pages/Story/AddStory.jsx';
 
 //import components
 import ProtectedRoutes from "./components/ProtectedRoutes";
